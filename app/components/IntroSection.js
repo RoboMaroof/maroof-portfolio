@@ -3,16 +3,19 @@ import Section from './Section'
 
 export default function IntroSection() {
   return (
-    <Section bg="bg-white">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold">Maroof Abdul Aziz</h1>
-        <p className="text-lg mt-2">
-          M.Sc. Robotic Systems Engineering @ RWTH Aachen | AI/LLM Developer | Thesis @ Audi | Ex-Mercedes-Benz
+    <section className="min-h-screen flex items-center justify-center bg-white px-6 pt-24">
+      <div className="text-center max-w-2xl">
+        <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
+          Maroof Abdul Aziz
+        </h1>
+        <p className="text-md md:text-lg text-gray-700">
+          M.Sc. Robotic Systems Engineering @ RWTH Aachen<br />
+          AI/LLM Developer | Thesis @ Audi | Ex-Mercedes-Benz
         </p>
-        <p className="mt-2 text-sm text-gray-600 max-w-3xl mx-auto">
-          AI engineer focused on deploying and optimizing LLMs and computer vision models...
+        <p className="text-sm text-gray-500 mt-4">
+          I specialize in deploying optimized LLMs & CV models. Skilled in LangChain, LangGraph, HuggingFace, and scalable full-stack AI systems.
         </p>
       </div>
-    </Section>
+    </section>
   )
 }
