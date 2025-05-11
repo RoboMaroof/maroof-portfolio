@@ -2,16 +2,9 @@
 
 import { motion } from 'framer-motion'
 
-const getIcon = (title) => {
-  if (title.toLowerCase().includes('thesis')) return '⚙️'
-  if (title.toLowerCase().includes('intern')) return '🏎️'
-  if (title.toLowerCase().includes('research')) return '🔬'
-  return '🛠️'
-}
-
-const TimelineItem = ({ title, company, date, points, projectId, icon, isLeft }) => (
-  <div className="relative w-full grid grid-cols-9 items-center gap-4 mb-12">
-    {/* Left side */}
+const TimelineItem = ({ title, company, date, points, projectId, logo, isLeft }) => (
+  <div className="relative w-full grid grid-cols-9 items-start gap-2 mb-16">
+    {/* Left card */}
     <div className={`col-span-4 ${isLeft ? '' : 'hidden md:block'}`}>
       {isLeft && (
         <motion.div
@@ -19,7 +12,7 @@ const TimelineItem = ({ title, company, date, points, projectId, icon, isLeft })
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="bg-white rounded-xl shadow p-6 w-full ml-auto max-w-[90%]"
+          className="bg-white rounded-xl shadow p-6 w-full ml-auto max-w-[95%]"
         >
           <h3 className="text-lg font-bold">{title}</h3>
           <p className="text-sm text-green-600">{company}</p>
@@ -44,15 +37,17 @@ const TimelineItem = ({ title, company, date, points, projectId, icon, isLeft })
       )}
     </div>
 
-    {/* Center icon */}
+    {/* Center logo & line */}
     <div className="col-span-1 flex flex-col items-center relative">
+      {/* Vertical line */}
       <div className="w-1 bg-gray-300 h-full absolute top-0 left-1/2 transform -translate-x-1/2 z-0" />
-      <div className="z-10 w-10 h-10 bg-blue-100 text-blue-700 rounded-full text-xl flex items-center justify-center shadow-md border-4 border-white">
-        {icon}
+      {/* Logo circle */}
+      <div className="z-10 w-12 h-12 rounded-full border-4 border-white shadow bg-white flex items-center justify-center">
+        <img src={`/images/${logo}`} alt={company} className="w-8 h-8 object-contain" />
       </div>
     </div>
 
-    {/* Right side */}
+    {/* Right card */}
     <div className={`col-span-4 ${isLeft ? 'hidden md:block' : ''}`}>
       {!isLeft && (
         <motion.div
@@ -60,7 +55,7 @@ const TimelineItem = ({ title, company, date, points, projectId, icon, isLeft })
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="bg-white rounded-xl shadow p-6 w-full mr-auto max-w-[90%]"
+          className="bg-white rounded-xl shadow p-6 w-full mr-auto max-w-[95%]"
         >
           <h3 className="text-lg font-bold">{title}</h3>
           <p className="text-sm text-green-600">{company}</p>
@@ -98,7 +93,7 @@ export default function ExperienceSection() {
         'Applied PEFT, LoRA, PTQ, ONNX acceleration.',
       ],
       projectId: 'llm-optimization',
-      icon: '⚙️',
+      logo: 'audi.jpg',
     },
     {
       title: 'Machine Learning Intern',
@@ -109,7 +104,7 @@ export default function ExperienceSection() {
         'Automated evaluation and CI/CD integration.',
       ],
       projectId: 'chatgpt-tts',
-      icon: '🏎️',
+      logo: 'audi.jpg',
     },
     {
       title: 'Research Assistant – Medical Imaging',
@@ -120,7 +115,7 @@ export default function ExperienceSection() {
         'Published in IEEE ICIP 2024.',
       ],
       projectId: 'renal-cancer',
-      icon: '🔬',
+      logo: 'rwth.png',
     },
     {
       title: 'Senior Product Design Engineer',
@@ -130,7 +125,7 @@ export default function ExperienceSection() {
         'Developed Python tools for automation.',
         'Led automotive exterior design projects.',
       ],
-      icon: '🛠️',
+      logo: 'mercedes.png',
     },
   ]
 
