@@ -1,5 +1,6 @@
 import Header from './components/Header'
 import IntroSection from './components/IntroSection'
+import ExperienceSection from './components/ExperienceSection'
 import ProjectsSection from './components/ProjectsSection'
 import PublicationsSection from './components/PublicationsSection'
 import ContactSection from './components/ContactSection'
@@ -10,6 +11,7 @@ export default function Home() {
     <main>
       <Header />
       <IntroSection />
+      <ExperienceSection />
       <ProjectsSection />
       <PublicationsSection />
       <ContactSection />
