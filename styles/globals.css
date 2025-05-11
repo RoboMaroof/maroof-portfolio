@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: 'Segoe UI', sans-serif;
+html {
+  scroll-behavior: smooth;
 }
