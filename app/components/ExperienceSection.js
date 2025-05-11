@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 
 const TimelineItem = ({ title, company, date, points, projectId, logo, isLeft }) => (
-  <div className="relative w-full grid grid-cols-9 items-start gap-2 mb-16">
+  <div className="relative w-full grid grid-cols-9 items-start gap-2 mb-20">
     {/* Left card */}
     <div className={`col-span-4 ${isLeft ? '' : 'hidden md:block'}`}>
       {isLeft && (
@@ -37,13 +37,17 @@ const TimelineItem = ({ title, company, date, points, projectId, logo, isLeft })
       )}
     </div>
 
-    {/* Center logo & line */}
+    {/* Center logo & vertical line */}
     <div className="col-span-1 flex flex-col items-center relative">
-      {/* Vertical line */}
-      <div className="w-1 bg-gray-300 h-full absolute top-0 left-1/2 transform -translate-x-1/2 z-0" />
-      {/* Logo circle */}
-      <div className="z-10 w-12 h-12 rounded-full border-4 border-white shadow bg-white flex items-center justify-center">
-        <img src={`/images/${logo}`} alt={company} className="w-8 h-8 object-contain" />
+      {/* Vertical line full height */}
+      <div className="absolute top-0 bottom-0 left-1/2 transform -translate-x-1/2 w-1 bg-gray-300 z-0" />
+      {/* Logo circle enlarged */}
+      <div className="z-10 w-24 h-24 rounded-full border-4 border-white shadow bg-white flex items-center justify-center">
+        <img
+          src={`/images/${logo}`}
+          alt={company}
+          className="w-16 h-16 object-contain"
+        />
       </div>
     </div>
 
