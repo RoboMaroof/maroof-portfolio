@@ -9,28 +9,21 @@ const getIcon = (title) => {
   return '🛠️'
 }
 
-const TimelineItem = ({ title, company, date, points, projectId, isLeft }) => (
+const TimelineItem = ({ title, company, date, points, projectId, icon }) => (
   <motion.div
     initial={{ opacity: 0, y: 50 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6 }}
     viewport={{ once: true }}
-    className={`relative w-full md:w-1/2 px-4 mb-12`}
-    style={{
-      justifySelf: isLeft ? 'end' : 'start',
-      textAlign: isLeft ? 'right' : 'left',
-    }}
+    className="relative flex flex-col items-center w-full"
   >
-    {/* Icon */}
-    <div
-      className={`absolute top-2 w-10 h-10 bg-blue-100 text-blue-700 rounded-full text-xl flex items-center justify-center shadow-md z-10 ${
-        isLeft ? 'right-[-30px]' : 'left-[-30px]'
-      }`}
-    >
-      {getIcon(title)}
+    {/* Centered Icon on Timeline */}
+    <div className="z-10 w-10 h-10 flex items-center justify-center text-xl bg-blue-100 text-blue-700 rounded-full border-4 border-white shadow mb-4">
+      {icon}
     </div>
 
-    <div className="bg-white rounded-xl shadow p-5 max-w-md">
+    {/* Experience Card */}
+    <div className="bg-white rounded-xl shadow p-6 w-full md:w-2/3">
       <h3 className="text-lg font-bold">{title}</h3>
       <p className="text-sm text-green-600">{company}</p>
       <p className="text-xs text-gray-400 mb-2">{date}</p>
@@ -65,6 +58,7 @@ export default function ExperienceSection() {
         'Applied PEFT, LoRA, PTQ, ONNX acceleration.',
       ],
       projectId: 'llm-optimization',
+      icon: '⚙️',
     },
     {
       title: "Machine Learning Intern",
@@ -75,6 +69,7 @@ export default function ExperienceSection() {
         'Automated evaluation and CI/CD integration.',
       ],
       projectId: 'chatgpt-tts',
+      icon: '🏎️',
     },
     {
       title: "Research Assistant – Medical Imaging",
@@ -85,6 +80,7 @@ export default function ExperienceSection() {
         'Published in IEEE ICIP 2024.',
       ],
       projectId: 'renal-cancer',
+      icon: '🔬',
     },
     {
       title: "Senior Product Design Engineer",
@@ -94,6 +90,7 @@ export default function ExperienceSection() {
         'Developed Python tools for automation.',
         'Led automotive exterior design projects.',
       ],
+      icon: '🛠️',
     },
   ]
 
@@ -102,13 +99,17 @@ export default function ExperienceSection() {
       <h2 className="text-3xl font-bold text-center mb-14 tracking-widest text-gray-700">
         🚀 Experience Timeline
       </h2>
-      <div className="relative max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-y-10">
-        {/* Vertical Line */}
-        <div className="hidden md:block absolute top-0 left-1/2 transform -translate-x-0.5 w-1 h-full bg-gray-300 z-0" />
 
-        {experiences.map((exp, index) => (
-          <TimelineItem key={index} {...exp} isLeft={index % 2 === 0} />
-        ))}
+      {/* Timeline Line */}
+      <div className="relative max-w-4xl mx-auto flex flex-col items-center">
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-full bg-gray-300 z-0" />
+
+        {/* Timeline Items */}
+        <div className="flex flex-col gap-14 z-10 w-full items-center">
+          {experiences.map((exp, index) => (
+            <TimelineItem key={index} {...exp} />
+          ))}
+        </div>
       </div>
     </section>
   )
