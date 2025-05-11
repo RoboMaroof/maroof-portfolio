@@ -1,16 +1,18 @@
 import Header from './components/Header'
-import Intro from './components/Intro'
+import IntroSection from './components/IntroSection'
 import ProjectsSection from './components/ProjectsSection'
-import Contact from './components/Contact'
+import PublicationsSection from './components/PublicationsSection'
+import ContactSection from './components/ContactSection'
 import Footer from './components/Footer'
 
 export default function Home() {
   return (
     <main className="bg-white text-black font-sans">
       <Header />
-      <Intro />
+      <IntroSection />
       <ProjectsSection />
-      <Contact />
+      <PublicationsSection />
+      <ContactSection />
       <Footer />
     </main>
   )

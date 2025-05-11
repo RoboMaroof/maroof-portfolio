@@ -1,13 +1,14 @@
+import '../styles/globals.css'
+
 export const metadata = {
-    title: "Maroof Abdul Aziz",
-    description: "AI Portfolio | LLMs, Vision, MLOps",
-  };
-  
-  export default function RootLayout({ children }) {
-    return (
-      <html lang="en">
-        <body className="bg-white text-gray-800 font-sans">{children}</body>
-      </html>
-    );
-  }
-  
+  title: 'Maroof Abdul Aziz | Portfolio',
+  description: 'AI/LLM Engineer portfolio and project showcase',
+}
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body className="font-sans">{children}</body>
+    </html>
+  )
+}

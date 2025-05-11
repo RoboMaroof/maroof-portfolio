@@ -1,27 +1,28 @@
+'use client'
+import Section from './Section'
 import ProjectCard from './ProjectCard'
 
 export default function ProjectsSection() {
-  const projects = [
-    {
-      title: 'Project One',
-      image: '/images/project1.jpg',
-      link: 'https://example.com',
-    },
-    {
-      title: 'Project Two',
-      image: '/images/project2.jpg',
-      link: 'https://example.com',
-    },
-  ]
-
   return (
-    <section className="p-10 bg-gray-50">
-      <h2 className="text-3xl font-bold mb-6 text-center">Projects</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {projects.map((project, i) => (
-          <ProjectCard key={i} {...project} />
-        ))}
-      </div>
-    </section>
+    <>
+      <Section title="🧠 NLP / LLM Projects" bg="bg-gray-50">
+        <ProjectCard
+          title="Internship: ChatGPT-Enhanced TTS @ Audi"
+          description="Integrated ChatGPT in online voice assistant..."
+          tech="Python, FastAPI, Azure, CI/CD, HuggingFace"
+        />
+        {/* Other NLP projects */}
+      </Section>
+
+      <Section title="🖼️ Computer Vision Projects" bg="bg-white">
+        <ProjectCard
+          title="Renal Cancer Detection (IEEE ICIP 2024)"
+          description="Developed deep learning pipeline for classification and grading..."
+          tech="PyTorch, OpenSlide, EfficientNet"
+          link="https://github.com/RoboMaroof/Cancer-Detection-on-WSIs---LFB"
+        />
+        {/* Other vision projects */}
+      </Section>
+    </>
   )
 }
