@@ -1,15 +1,17 @@
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Projects from "./components/Projects";
-import Contact from "./components/Contact";
+import Header from './components/Header'
+import Intro from './components/Intro'
+import ProjectsSection from './components/ProjectsSection'
+import Contact from './components/Contact'
+import Footer from './components/Footer'
 
 export default function Home() {
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <Projects />
+    <main className="bg-white text-black font-sans">
+      <Header />
+      <Intro />
+      <ProjectsSection />
       <Contact />
-    </>
-  );
+      <Footer />
+    </main>
+  )
 }
