@@ -1,8 +1,11 @@
 'use client'
 import Section from './Section'
 
-const ProjectTile = ({ title, points, link }) => (
-  <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition w-full md:w-[48%] lg:w-[30%]">
+const ProjectTile = ({ title, points, link, id }) => (
+  <div
+    id={id}
+    className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition w-full md:w-[48%] lg:w-[30%]"
+  >
     <h3 className="text-lg font-bold mb-2">{title}</h3>
     <ul className="text-sm list-disc pl-5 text-gray-700 space-y-1">
       {points.map((pt, i) => (
@@ -27,6 +30,7 @@ export default function ProjectsSection() {
       <h2 className="text-3xl font-bold text-center mb-10">🧠 NLP / LLM Projects</h2>
       <div className="flex flex-wrap gap-6 justify-center">
         <ProjectTile
+          id="chatgpt-tts"
           title="🔊 ChatGPT-Enhanced TTS @ Audi"
           points={[
             'Integrated ChatGPT into online speech processing.',
@@ -37,6 +41,7 @@ export default function ProjectsSection() {
           ]}
         />
         <ProjectTile
+          id="llm-optimization"
           title="⚙️ Master Thesis: Optimizing Small LLMs"
           points={[
             'Fine-tuning and compressing LLMs for low-resource devices.',
@@ -44,6 +49,7 @@ export default function ProjectsSection() {
           ]}
         />
         <ProjectTile
+          id="rag-suite"
           title="🧪 LangChain RAG Agent Suite"
           points={[
             'Modular RAG framework using LangChain + LlamaIndex.',
@@ -51,6 +57,7 @@ export default function ProjectsSection() {
           link="https://github.com/RoboMaroof/LangChain-RAG-Agent-Suite"
         />
         <ProjectTile
+          id="langgraph-agent"
           title="🧠 LangGraph Agent Deployment"
           points={[
             'Production-ready RAG using LangGraph, Docker, AWS EC2, CI/CD.',
@@ -62,6 +69,7 @@ export default function ProjectsSection() {
       <h2 className="text-3xl font-bold text-center mt-20 mb-10">🖼️ Computer Vision Projects</h2>
       <div className="flex flex-wrap gap-6 justify-center">
         <ProjectTile
+          id="renal-cancer"
           title="🔬 Renal Cancer Detection (IEEE ICIP 2024)"
           points={[
             'Developed pipeline for classification and grading of renal carcinoma.',
@@ -71,6 +79,7 @@ export default function ProjectsSection() {
           link="https://github.com/RoboMaroof/Cancer-Detection-on-WSIs---LFB"
         />
         <ProjectTile
+          id="driver-drowsiness"
           title="😴 Driver Drowsiness Detection"
           points={[
             'Real-time driver fatigue detection using facial landmarks.',
