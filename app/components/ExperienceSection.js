@@ -1,21 +1,23 @@
 'use client'
-
 import { motion } from 'framer-motion'
 
 const TimelineItem = ({ title, company, date, points, projectId, logo, isLeft }) => (
-  <div className="relative w-full grid grid-cols-9 items-start gap-2 mb-20">
-    {/* Left card */}
+  <div className="relative w-full grid grid-cols-9 items-start gap-2 mb-4 transition-all z-10 group">
+    {/* Left Card */}
     <div className={`col-span-4 ${isLeft ? '' : 'hidden md:block'}`}>
       {isLeft && (
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
           viewport={{ once: true }}
-          className="bg-white rounded-xl shadow p-6 w-full ml-auto max-w-[95%]"
+          className="bg-white rounded-xl shadow p-4 w-full ml-auto max-w-[95%] 
+                    transform transition-all duration-300 scale-95 opacity-60 
+                    group-hover:scale-105 group-hover:opacity-100 group-hover:z-20 
+                    group-hover:shadow-lg group-hover:shadow-gray-400 group-hover:bg-gray-50"
         >
           <h3 className="text-lg font-bold">{title}</h3>
-          <p className="text-sm text-green-600">{company}</p>
+          <p className="text-sm text-black-600">{company}</p>
           <p className="text-xs text-gray-400 mb-2">{date}</p>
           <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1">
             {points.map((pt, i) => (
@@ -37,32 +39,36 @@ const TimelineItem = ({ title, company, date, points, projectId, logo, isLeft })
       )}
     </div>
 
-    {/* Center logo & vertical line */}
-    <div className="col-span-1 flex flex-col items-center relative">
-      {/* Vertical line full height */}
-      <div className="absolute top-0 bottom-0 left-1/2 transform -translate-x-1/2 w-1 bg-gray-300 z-0" />
-      {/* Logo circle enlarged */}
-      <div className="z-10 w-24 h-24 rounded-full border-4 border-white shadow bg-white flex items-center justify-center">
+    {/* Center Logo */}
+    <div className="col-span-1 flex flex-col items-center relative z-10">
+      <div className="w-16 h-16 rounded-full border-4 border-white shadow bg-white 
+                      flex items-center justify-center transform scale-95 
+                      transition-all duration-300 
+                      group-hover:scale-110 group-hover:shadow-md group-hover:shadow-gray-400"
+      >
         <img
           src={`/images/${logo}`}
           alt={company}
-          className="w-16 h-16 object-contain"
+          className="w-10 h-10 object-contain"
         />
       </div>
     </div>
 
-    {/* Right card */}
+    {/* Right Card */}
     <div className={`col-span-4 ${isLeft ? 'hidden md:block' : ''}`}>
       {!isLeft && (
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
           viewport={{ once: true }}
-          className="bg-white rounded-xl shadow p-6 w-full mr-auto max-w-[95%]"
+          className="bg-white rounded-xl shadow p-4 w-full mr-auto max-w-[95%] 
+                    transform transition-all duration-300 scale-95 opacity-60 
+                    group-hover:scale-105 group-hover:opacity-100 group-hover:z-20 
+                    group-hover:shadow-lg group-hover:shadow-gray-400 group-hover:bg-gray-50"
         >
           <h3 className="text-lg font-bold">{title}</h3>
-          <p className="text-sm text-green-600">{company}</p>
+          <p className="text-sm text-black-600">{company}</p>
           <p className="text-xs text-gray-400 mb-2">{date}</p>
           <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1">
             {points.map((pt, i) => (
@@ -85,6 +91,7 @@ const TimelineItem = ({ title, company, date, points, projectId, logo, isLeft })
     </div>
   </div>
 )
+
 
 export default function ExperienceSection() {
   const experiences = [
@@ -134,11 +141,17 @@ export default function ExperienceSection() {
   ]
 
   return (
-    <section id="experience" className="bg-gray-50 py-20 px-6">
-      <h2 className="text-3xl font-bold text-center mb-14 tracking-widest text-gray-700">
-        🚀 Experience Timeline
+    <section
+      id="experience"
+      className="snap-start min-h-screen bg-gray-200 px-6 pt-24"
+    >
+      <h2 className="text-3xl font-bold text-center mb-8 tracking-[0.35em] text-gray-700">
+        EXPERIENCE
       </h2>
-      <div className="max-w-6xl mx-auto">
+      <div className="relative max-w-6xl mx-auto flex flex-col gap-2">
+        {/* Central vertical line */}
+        <div className="absolute top-0 bottom-0 left-1/2 transform -translate-x-1/2 w-1 bg-gray-500 z-0" />
+        
         {experiences.map((exp, i) => (
           <TimelineItem key={i} {...exp} isLeft={i % 2 === 0} />
         ))}
