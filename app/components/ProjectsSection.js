@@ -4,73 +4,73 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 const projects = [
   {
-    id: "chatgpt-tts",
-    title: "Internship: ChatGPT-Enhanced TTS @ Audi",
-    points: [
-      'Integrated ChatGPT into online speech processing.',
-      'Improved TTS functionality via automated tuning.',
-      'Created multilingual evaluation datasets.',
-      'Benchmarked vector similarity for speech.',
-      'Automated tests into CI/CD pipeline.',
-    ],
-    image: "/images/internship_flowchart.png",
-    tech: ["python.png", "tensorflow.png", "docker.png"]
-  },
-  {
     id: "llm-optimization",
     title: "Master Thesis: Optimizing Small Language Models",
     points: [
-      'Fine-tuning and compressing LLMs for low-resource devices.',
-      'Used PEFT, LoRA, PTQ and GGUF acceleration.',
+      'Optimized small language models for CPU-only embedded systems and in-vehicle voice assistants.',
+      'Designed and fine-tuned models using QLoRA with special tokens for tool-call accuracy.',
+      'Applied structured pruning and quantization (GPTQ, GGUF) for efficient model compression.',
+      'Built synthetic datasets simulating realistic vehicle assistant queries and tool usage.',
+      'Benchmarked models using real-world metrics: latency, memory, accuracy, and on-device inference speed.'
     ],
     image: "/images/thesis_flowchart.png",
-    tech: ["python.png", "huggingface.png"]
+    tech: ["python.png", "pytorch.png", "huggingface.png", "ollama.jpg", "azure.png", "mlflow.png", "mlstudio.png"],
   },
   {
     id: "rag-suite",
     title: "LangChain RAG Agent Suite",
     points: [
       'Modular RAG framework using LangChain + LlamaIndex.',
+      'RAG pipelines with multi-source ingestion: web, PDFs, and SQL databases.',
+      'Wikipedia, Arxiv, and Tavily tools for agent-based question answering.',
+      'Used FAISS for vector storage and LLM-based reranking for response relevance.',
+      'FastAPI backend and Streamlit frontend for interactive multi-modal user experience.'
     ],
     link: "https://github.com/RoboMaroof/LangChain-RAG-Agent-Suite",
     image: "/images/LangGraph_1.png",
-    tech: ["langchain.png", "llamaindex.png", "python.png"]
+    tech: ["python.png", "langgraph.png", "llamaindex.png", "chatgpt.png", "groq.png", "cohere.png"]
   },
   {
     id: "langgraph-agent",
     title: "LangGraph Agent Deployment",
     points: [
-      'Production-ready RAG using LangGraph, Docker, AWS EC2, CI/CD.',
+      'Full-stack RAG application using FastAPI, LangGraph, and Streamlit for tool-using LLM agents.',
+      'Document ingestion from websites, PDFs, and SQL into a Qdrant vector store using LlamaIndex.',
+      'OpenAI and Groq models with session memory, tool calls, and LLM-based reranking.',
+      'CI/CD pipeline with GitHub Actions to automate testing and deploy Docker containers to AWS EC2.',
+      'User-friendly chat interface for uploading data, switching models, and visualizing agent reasoning.'
     ],
     link: "https://github.com/RoboMaroof/LangGraph-Agent-LLMOps-Deployment",
     image: "/images/LangGraph_2.png",
-    tech: ["langgraph.png", "aws.png", "docker.png"]
+    tech: ["python.png", "langgraph.png", "llamaindex.png", "aws.png", "docker.png", "qdrant.png", "chatgpt.png", "groq.png", "cohere.png"]
   },
   {
     id: "cancer-detection",
     title: "Cancer Detection on Whole Slide Images",
     points: [
-      'Developed a deep learning pipeline for cancer detection.',
-      'Utilized PyTorch, OpenCV, and FastAPI.',
-      'Implemented data augmentation and transfer learning.',
-      'Achieved 95% accuracy on test set.',
+      'Cancer detection and subtyping using whole-slide histopathology images.',
+      'Attention-based heat maps to highlight tumor regions for interpretability and patch selection.',
+      'Integrated patch-level annotations and center loss to improve classification accuracy and feature separation.',
+      'Improved preprocessing with white-patch filtering and magnification normalization for consistent patch quality.',
+      'Enhanced RCC subtype classification, achieving better AUC, bACC, and F1 than baseline models.',
     ],
     link: "https://github.com/RoboMaroof/Cancer-Detection-on-WSIs",
     image: "/images/heatmap.png",
-    tech: ["pytorch.png", "opencv.png", "fastapi.png"]
+    tech: ["python.png", "pytorch.png", "tensorflow.png", "scikit-learn.png", "numpy.png", "git.png"]
   },
   {
     id: "drowsiness-detection",
     title: "Driver Drowsiness Detection",
     points: [
-      'Developed a real-time drowsiness detection system.',
-      'Utilized OpenCV and TensorFlow.',
-      'Implemented face detection and eye tracking.',
-      'Achieved 90% accuracy on test set.',
+      'Built drowsiness detection model using CNNs and facial landmarks on 40K+ driver images.',
+      'Achieved 90% accuracy with custom CNN and 86% with ResNet50 transfer learning.',
+      'Used OpenCV for facial landmark detection to identify drowsy behavior.',
+      'Compared traditional CNN, OpenCV, and transfer learning approaches for performance.',
+      'Collaborated with TechLabs Aachen team during the Digital Shaper Program.'
     ],
     link: "https://github.com/RoboMaroof/TechLabs_DriverDrowsinessDetection",
     image: "/images/drowsiness_detection.png",
-    tech: ["tensorflow.png", "opencv.png"]
+    tech: ["python.png", "tensorflow.png", "opencv.png", "scikit-learn.png", "numpy.png", "git.png"]
   },
 ]
 

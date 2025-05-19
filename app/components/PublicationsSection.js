@@ -20,7 +20,7 @@ const publications = [
     description: 'My Master’s thesis focused on usage of SLMs on edge devices.',
     link: '/docs/maroof_thesis.pdf',
     embedType: 'images',
-    imageCount: 68, // Change this based on how many images you generated
+    imageCount: 68, // Change this based on how many images generated from pdf
     imagePrefix: '/docs/thesis_images/page_', // should point to e.g. /public/docs/thesis_images/page_1.png
   }
 ]
