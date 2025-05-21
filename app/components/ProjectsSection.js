@@ -6,6 +6,7 @@ const projects = [
   {
     id: "llm-optimization",
     title: "Master Thesis: Optimizing Small Language Models",
+    timeline: "Jan 2024 – May 2024",
     points: [
       'Optimized small language models for CPU-only embedded systems and in-vehicle voice assistants.',
       'Designed and fine-tuned models using QLoRA with special tokens for tool-call accuracy.',
@@ -19,6 +20,7 @@ const projects = [
   {
     id: "rag-suite",
     title: "LangChain RAG Agent Suite",
+    timeline: "Nov 2023 – Jan 2024",
     points: [
       'Modular RAG framework using LangChain + LlamaIndex.',
       'RAG pipelines with multi-source ingestion: web, PDFs, and SQL databases.',
@@ -33,6 +35,7 @@ const projects = [
   {
     id: "langgraph-agent",
     title: "LangGraph Agent Deployment",
+    timeline: "Feb 2024 – Apr 2024",
     points: [
       'Full-stack RAG application using FastAPI, LangGraph, and Streamlit for tool-using LLM agents.',
       'Document ingestion from websites, PDFs, and SQL into a Qdrant vector store using LlamaIndex.',
@@ -47,6 +50,7 @@ const projects = [
   {
     id: "cancer-detection",
     title: "Cancer Detection on Whole Slide Images",
+    timeline: "Jul 2023 – Oct 2023",
     points: [
       'Cancer detection and subtyping using whole-slide histopathology images.',
       'Attention-based heat maps to highlight tumor regions for interpretability and patch selection.',
@@ -55,12 +59,13 @@ const projects = [
       'Enhanced RCC subtype classification, achieving better AUC, bACC, and F1 than baseline models.',
     ],
     link: "https://github.com/RoboMaroof/Cancer-Detection-on-WSIs",
-    image: "/images/heatmap.png",
+    image: "/images/paper.png",
     tech: ["python.png", "pytorch.png", "tensorflow.png", "scikit-learn.png", "numpy.png", "git.png"]
   },
   {
     id: "drowsiness-detection",
     title: "Driver Drowsiness Detection",
+    timeline: "May 2023 – Jul 2023",
     points: [
       'Built drowsiness detection model using CNNs and facial landmarks on 40K+ driver images.',
       'Achieved 90% accuracy with custom CNN and 86% with ResNet50 transfer learning.',
@@ -74,8 +79,32 @@ const projects = [
   },
 ]
 
+const iconTitles = {
+  "python.png": "Python",
+  "pytorch.png": "PyTorch",
+  "tensorflow.png": "TensorFlow",
+  "scikit-learn.png": "Scikit-learn",
+  "numpy.png": "NumPy",
+  "git.png": "Git",
+  "huggingface.png": "HuggingFace",
+  "ollama.jpg": "Ollama",
+  "azure.png": "Azure",
+  "mlflow.png": "MLflow",
+  "mlstudio.png": "ML Studio",
+  "langgraph.png": "LangGraph",
+  "llamaindex.png": "LlamaIndex",
+  "chatgpt.png": "ChatGPT",
+  "groq.png": "Groq",
+  "cohere.png": "Cohere",
+  "aws.png": "AWS",
+  "docker.png": "Docker",
+  "qdrant.png": "Qdrant",
+  "opencv.png": "OpenCV"
+}
+
 export default function ProjectsSection() {
   const [index, setIndex] = useState(0)
+  const [zoomedImage, setZoomedImage] = useState(null)
   const total = projects.length
 
   const getProject = (i) => projects[(i + total) % total]
@@ -124,7 +153,8 @@ export default function ProjectsSection() {
 
               {/* Project Card */}
               <div className="bg-gray-200 rounded-2xl shadow-xl p-6 h-[600px] flex flex-col">
-                <h3 className="text-2xl font-semibold text-center mb-4">{proj.title}</h3>
+                <h3 className="text-2xl font-semibold text-center mb-1">{proj.title}</h3>
+                <p className="text-center text-sm text-gray-500 mb-3">{proj.timeline}</p>
                 <div className="flex flex-col md:flex-row gap-6 flex-1">
                   {/* Left */}
                   <div className="flex-1 flex flex-col justify-between text-left">
@@ -153,7 +183,7 @@ export default function ProjectsSection() {
                           <div
                             key={i}
                             className="w-16 h-16 bg-white rounded-full shadow flex items-center justify-center p-2"
-                            title={icon.replace(".png", "")}
+                            title={iconTitles[icon] || icon.replace(".png", "")}
                           >
                             <img
                               src={`/tech/${icon}`}
@@ -172,7 +202,8 @@ export default function ProjectsSection() {
                       <img
                         src={proj.image}
                         alt={proj.title}
-                        className="max-h-[500px] w-auto object-contain rounded-lg shadow"
+                        onClick={() => setZoomedImage(proj.image)}
+                        className="max-h-[500px] w-auto object-contain rounded-lg shadow cursor-zoom-in"
                       />
                     )}
                   </div>
@@ -182,6 +213,20 @@ export default function ProjectsSection() {
           )
         })}
       </div>
+
+      {/* Zoom Modal */}
+      {zoomedImage && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 cursor-zoom-out"
+          onClick={() => setZoomedImage(null)}
+        >
+          <img
+            src={zoomedImage}
+            alt="Zoomed"
+            className="max-w-full max-h-full object-contain"
+          />
+        </div>
+      )}
     </section>
   )
 }
