@@ -20,8 +20,8 @@ const publications = [
     description: 'My Master’s thesis focused on usage of SLMs on edge devices.',
     link: '/docs/maroof_thesis.pdf',
     embedType: 'images',
-    imageCount: 68, // Change this based on how many images generated from pdf
-    imagePrefix: '/docs/thesis_images/page_', // should point to e.g. /public/docs/thesis_images/page_1.png
+    imageCount: 68,
+    imagePrefix: '/docs/thesis_images/page_',
   }
 ]
 
@@ -33,14 +33,14 @@ export default function PublicationsSection() {
   return (
     <section
       id="publications"
-      className="snap-start min-h-screen bg-gray-200 px-6 pt-24 relative flex flex-col items-center justify-center"
+      className="snap-start min-h-screen bg-gray-200 px-4 sm:px-6 pt-24 relative flex flex-col items-center justify-center"
     >
       <h2 className="text-3xl font-bold text-center mb-8 tracking-[0.35em] text-gray-700">
         PUBLICATIONS
       </h2>
 
-      <div className="relative w-full max-w-6xl h-[800px] flex items-center justify-center">
-        {/* Arrows */}
+      {/* 💻 Desktop Carousel */}
+      <div className="hidden md:flex relative w-full max-w-6xl h-[800px] items-center justify-center">
         {index > 0 && (
           <button
             onClick={() => setIndex((index - 1 + total) % total)}
@@ -60,7 +60,6 @@ export default function PublicationsSection() {
           </button>
         )}
 
-        {/* Card */}
         <div className="bg-white rounded-2xl shadow-xl p-6 h-[750px] w-full max-w-[90%] flex flex-col justify-between overflow-hidden">
           <div className="flex items-start gap-3 mb-4">
             <FaFileAlt className="text-2xl text-gray-700 mt-1" />
@@ -79,7 +78,6 @@ export default function PublicationsSection() {
             </div>
           </div>
 
-          {/* Embed or Image Viewer */}
           <div className="w-full h-[620px] overflow-y-auto rounded border shadow-inner p-2 bg-gray-100">
             {pub.embedType === 'pdf' ? (
               <iframe
@@ -104,6 +102,58 @@ export default function PublicationsSection() {
             )}
           </div>
         </div>
+      </div>
+
+      {/* 📱 Mobile Horizontal Scroll */}
+      <div className="md:hidden flex overflow-x-auto no-scrollbar snap-x snap-mandatory gap-4 px-1 -mx-1 pb-6 w-full">
+        {publications.map((pub) => (
+          <div
+            key={pub.id}
+            className="min-w-full snap-center bg-white rounded-xl shadow-lg p-4 flex flex-col justify-between"
+          >
+            <div className="flex items-start gap-2 mb-2">
+              <FaFileAlt className="text-xl text-gray-700 mt-1" />
+              <div>
+                <h3 className="text-lg font-semibold">{pub.title}</h3>
+                <p className="text-gray-600 text-sm">{pub.subtitle}</p>
+                <p className="mt-1 text-sm text-gray-700">{pub.description}</p>
+                <a
+                  href={pub.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-blue-600 text-sm hover:underline mt-2 inline-block"
+                >
+                  View Document ↗
+                </a>
+              </div>
+            </div>
+
+            {/* Limited Embed Preview */}
+            <div className="mt-4 max-h-[400px] overflow-y-auto border rounded bg-gray-100 shadow-inner p-2">
+              {pub.embedType === 'pdf' ? (
+                <iframe
+                  src={pub.embed}
+                  title={pub.title}
+                  width="100%"
+                  height="300"
+                  className="rounded shadow border"
+                  allow="autoplay"
+                ></iframe>
+              ) : (
+                <div className="flex flex-col items-center space-y-2">
+                  {Array.from({ length: Math.min(pub.imageCount, 3) }, (_, i) => (
+                    <img
+                      key={i}
+                      src={`${pub.imagePrefix}${i + 1}.png`}
+                      alt={`Page ${i + 1}`}
+                      className="w-full object-contain rounded"
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   )
