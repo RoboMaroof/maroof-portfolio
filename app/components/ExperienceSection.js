@@ -92,7 +92,6 @@ const TimelineItem = ({ title, company, date, points, projectId, logo, isLeft })
   </div>
 )
 
-
 export default function ExperienceSection() {
   const experiences = [
     {
@@ -143,18 +142,59 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="snap-start min-h-screen bg-gray-200 px-6 pt-24"
+      className="snap-start min-h-screen bg-gray-200 px-4 sm:px-6 pt-24"
     >
       <h2 className="text-3xl font-bold text-center mb-8 tracking-[0.35em] text-gray-700">
         EXPERIENCE
       </h2>
-      <div className="relative max-w-6xl mx-auto flex flex-col gap-2">
-        {/* Central vertical line */}
-        <div className="absolute top-0 bottom-0 left-1/2 transform -translate-x-1/2 w-1 bg-gray-500 z-0" />
-        
-        {experiences.map((exp, i) => (
-          <TimelineItem key={i} {...exp} isLeft={i % 2 === 0} />
-        ))}
+      <div className="relative max-w-6xl mx-auto">
+        {/* Desktop timeline */}
+        <div className="hidden md:block relative flex flex-col gap-2">
+          <div className="absolute top-0 bottom-0 left-1/2 transform -translate-x-1/2 w-1 bg-gray-500 z-0" />
+          {experiences.map((exp, i) => (
+            <TimelineItem key={i} {...exp} isLeft={i % 2 === 0} />
+          ))}
+        </div>
+
+        {/* Mobile horizontal timeline */}
+        <div className="md:hidden overflow-x-auto flex snap-x snap-mandatory space-x-6 px-1 pb-4">
+          {experiences.map((exp, i) => (
+            <div
+              key={i}
+              className="min-w-[85%] snap-start bg-white rounded-xl shadow p-4 flex-shrink-0"
+            >
+              <div className="flex flex-col items-center mb-4">
+                <div className="w-14 h-14 rounded-full border-4 border-white shadow bg-white flex items-center justify-center">
+                  <img
+                    src={`/images/${exp.logo}`}
+                    alt={exp.company}
+                    className="w-10 h-10 object-contain"
+                  />
+                </div>
+                <div className="h-1 w-16 bg-gray-400 mt-2" />
+              </div>
+              <h3 className="text-lg font-bold text-center">{exp.title}</h3>
+              <p className="text-sm text-gray-600 text-center">{exp.company}</p>
+              <p className="text-xs text-gray-400 text-center mb-2">{exp.date}</p>
+              <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 text-left">
+                {exp.points.map((pt, i) => (
+                  <li key={i}>{pt}</li>
+                ))}
+              </ul>
+              {exp.projectId && (
+                <button
+                  onClick={() => {
+                    const el = document.getElementById(exp.projectId)
+                    if (el) el.scrollIntoView({ behavior: 'smooth' })
+                  }}
+                  className="text-blue-600 text-sm mt-2 inline-block hover:underline"
+                >
+                  View Project ↘
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )

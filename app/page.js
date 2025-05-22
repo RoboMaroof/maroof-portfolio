@@ -8,14 +8,16 @@ import Footer from './components/Footer'
 
 export default function Home() {
   return (
-    <main>
+    <>
       <Header />
-      <IntroSection />
-      <ExperienceSection />
-      <ProjectsSection />
-      <PublicationsSection />
-      <ContactSection />
-      <Footer />
-    </main>
+      <main className="snap-y snap-mandatory overflow-y-scroll h-screen pt-20">
+        <IntroSection />
+        <ExperienceSection />
+        <ProjectsSection />
+        <PublicationsSection />
+        <ContactSection />
+        <Footer />
+      </main>
+    </>
   )
 }

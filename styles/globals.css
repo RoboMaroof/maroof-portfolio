@@ -8,6 +8,7 @@ html {
 
 body {
   font-family: 'Inter', sans-serif;
+  @apply text-base;
 }
 
 html, body {
