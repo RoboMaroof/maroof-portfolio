@@ -1,5 +1,47 @@
 'use client'
 import { motion } from 'framer-motion'
+import { useRef } from 'react'
+
+const ExperienceCard = ({ title, company, date, points, projectId, logo }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.4 }}
+    viewport={{ once: true }}
+    className="min-w-[300px] max-w-xs sm:max-w-sm bg-white rounded-xl shadow p-4 mx-2 flex-shrink-0
+               transform transition-all duration-300 scale-95 opacity-60 hover:scale-105 hover:opacity-100 
+               hover:z-20 hover:shadow-lg hover:shadow-gray-400 hover:bg-gray-50"
+  >
+    <div className="flex items-center gap-3 mb-2">
+      <img
+        src={`/images/${logo}`}
+        alt={company}
+        className="w-10 h-10 object-contain rounded-full border"
+      />
+      <div>
+        <h3 className="text-base font-bold">{title}</h3>
+        <p className="text-sm text-gray-600">{company}</p>
+        <p className="text-xs text-gray-400">{date}</p>
+      </div>
+    </div>
+    <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1">
+      {points.map((pt, i) => (
+        <li key={i}>{pt}</li>
+      ))}
+    </ul>
+    {projectId && (
+      <button
+        onClick={() => {
+          const el = document.getElementById(projectId)
+          if (el) el.scrollIntoView({ behavior: 'smooth' })
+        }}
+        className="text-blue-600 text-sm mt-2 inline-block hover:underline"
+      >
+        View Project ↘
+      </button>
+    )}
+  </motion.div>
+)
 
 const TimelineItem = ({ title, company, date, points, projectId, logo, isLeft }) => (
   <div className="relative w-full grid grid-cols-9 items-start gap-2 mb-4 transition-all z-10 group">
@@ -147,54 +189,21 @@ export default function ExperienceSection() {
       <h2 className="text-3xl font-bold text-center mb-8 tracking-[0.35em] text-gray-700">
         EXPERIENCE
       </h2>
-      <div className="relative max-w-6xl mx-auto">
-        {/* Desktop timeline */}
-        <div className="hidden md:block relative flex flex-col gap-2">
-          <div className="absolute top-0 bottom-0 left-1/2 transform -translate-x-1/2 w-1 bg-gray-500 z-0" />
-          {experiences.map((exp, i) => (
-            <TimelineItem key={i} {...exp} isLeft={i % 2 === 0} />
-          ))}
-        </div>
 
-        {/* Mobile horizontal timeline */}
-        <div className="md:hidden overflow-x-auto flex snap-x snap-mandatory space-x-6 px-1 pb-4">
-          {experiences.map((exp, i) => (
-            <div
-              key={i}
-              className="min-w-[85%] snap-start bg-white rounded-xl shadow p-4 flex-shrink-0"
-            >
-              <div className="flex flex-col items-center mb-4">
-                <div className="w-14 h-14 rounded-full border-4 border-white shadow bg-white flex items-center justify-center">
-                  <img
-                    src={`/images/${exp.logo}`}
-                    alt={exp.company}
-                    className="w-10 h-10 object-contain"
-                  />
-                </div>
-                <div className="h-1 w-16 bg-gray-400 mt-2" />
-              </div>
-              <h3 className="text-lg font-bold text-center">{exp.title}</h3>
-              <p className="text-sm text-gray-600 text-center">{exp.company}</p>
-              <p className="text-xs text-gray-400 text-center mb-2">{exp.date}</p>
-              <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 text-left">
-                {exp.points.map((pt, i) => (
-                  <li key={i}>{pt}</li>
-                ))}
-              </ul>
-              {exp.projectId && (
-                <button
-                  onClick={() => {
-                    const el = document.getElementById(exp.projectId)
-                    if (el) el.scrollIntoView({ behavior: 'smooth' })
-                  }}
-                  className="text-blue-600 text-sm mt-2 inline-block hover:underline"
-                >
-                  View Project ↘
-                </button>
-              )}
-            </div>
-          ))}
-        </div>
+      {/* Desktop Timeline */}
+      <div className="relative max-w-6xl mx-auto hidden md:flex flex-col gap-2">
+        {/* Central vertical line */}
+        <div className="absolute top-0 bottom-0 left-1/2 transform -translate-x-1/2 w-1 bg-gray-500 z-0" />
+        {experiences.map((exp, i) => (
+          <TimelineItem key={i} {...exp} isLeft={i % 2 === 0} />
+        ))}
+      </div>
+
+      {/* Mobile Horizontal Scroll */}
+      <div className="md:hidden flex overflow-x-auto no-scrollbar snap-x snap-mandatory px-2 -mx-2 pb-4">
+        {experiences.map((exp, i) => (
+          <ExperienceCard key={i} {...exp} />
+        ))}
       </div>
     </section>
   )
