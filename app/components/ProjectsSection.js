@@ -4,6 +4,21 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 const projects = [
   {
+    id: "langgraph-agent",
+    title: "LangGraph Agent Deployment",
+    timeline: "Feb 2024 – Apr 2024",
+    points: [
+      'Full-stack RAG application using FastAPI, LangGraph, and Streamlit for tool-using LLM agents.',
+      'Document ingestion from websites, PDFs, and SQL into a Qdrant vector store using LlamaIndex.',
+      'OpenAI and Groq models with session memory, tool calls, and LLM-based reranking.',
+      'CI/CD pipeline with GitHub Actions to automate testing and deploy Docker containers to AWS EC2.',
+      'User-friendly chat interface for uploading data, switching models, and visualizing agent reasoning.'
+    ],
+    link: "https://github.com/RoboMaroof/LangGraph-Agent-LLMOps-Deployment",
+    image: "/images/LangGraph_App_2.png",
+    tech: ["python.png", "langgraph.png", "llamaindex.png", "aws.png", "docker.png", "qdrant.png", "chatgpt.png", "groq.png", "cohere.png"]
+  },
+  {
     id: "llm-optimization",
     title: "Master Thesis: Optimizing Small Language Models",
     timeline: "Jan 2024 – May 2024",
@@ -29,23 +44,8 @@ const projects = [
       'FastAPI backend and Streamlit frontend for interactive multi-modal user experience.'
     ],
     link: "https://github.com/RoboMaroof/LangChain-RAG-Agent-Suite",
-    image: "/images/LangGraph_1.png",
+    image: "/images/LangGraph_App_1.png",
     tech: ["python.png", "langgraph.png", "llamaindex.png", "chatgpt.png", "groq.png", "cohere.png"]
-  },
-  {
-    id: "langgraph-agent",
-    title: "LangGraph Agent Deployment",
-    timeline: "Feb 2024 – Apr 2024",
-    points: [
-      'Full-stack RAG application using FastAPI, LangGraph, and Streamlit for tool-using LLM agents.',
-      'Document ingestion from websites, PDFs, and SQL into a Qdrant vector store using LlamaIndex.',
-      'OpenAI and Groq models with session memory, tool calls, and LLM-based reranking.',
-      'CI/CD pipeline with GitHub Actions to automate testing and deploy Docker containers to AWS EC2.',
-      'User-friendly chat interface for uploading data, switching models, and visualizing agent reasoning.'
-    ],
-    link: "https://github.com/RoboMaroof/LangGraph-Agent-LLMOps-Deployment",
-    image: "/images/LangGraph_2.png",
-    tech: ["python.png", "langgraph.png", "llamaindex.png", "aws.png", "docker.png", "qdrant.png", "chatgpt.png", "groq.png", "cohere.png"]
   },
   {
     id: "cancer-detection",

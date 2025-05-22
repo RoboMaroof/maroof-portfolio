@@ -33,7 +33,7 @@ export default function PublicationsSection() {
   return (
     <section
       id="publications"
-      className="snap-start min-h-screen bg-gray-200 px-4 sm:px-6 pt-24 relative flex flex-col items-center justify-center"
+      className="min-h-screen bg-gray-200 px-4 sm:px-6 pt-24 pb-16 flex flex-col items-center"
     >
       <h2 className="text-3xl font-bold text-center mb-8 tracking-[0.35em] text-gray-700">
         PUBLICATIONS
