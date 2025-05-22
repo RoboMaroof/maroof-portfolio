@@ -102,22 +102,23 @@ const iconTitles = {
   "opencv.png": "OpenCV"
 }
 
-export default function ProjectsSection() {
+const ProjectsSection = () => {
   const [index, setIndex] = useState(0)
   const [zoomedImage, setZoomedImage] = useState(null)
   const total = projects.length
+
   const getProject = (i) => projects[(i + total) % total]
 
   return (
     <section
       id="projects"
-      className="snap-start min-h-screen bg-white px-4 sm:px-6 pt-24 relative flex flex-col items-center justify-center"
+      className="snap-start min-h-screen bg-white pt-24 relative flex flex-col items-center justify-center"
     >
       <h2 className="text-3xl font-bold text-center mb-8 tracking-[0.35em] text-gray-700">
         PROJECTS
       </h2>
 
-      {/* 🖥️ Desktop Carousel */}
+      {/* Desktop Carousel */}
       <div className="hidden md:flex relative w-full max-w-6xl h-[700px] items-center justify-center">
         {[ -1, 0, 1 ].map(offset => {
           const proj = getProject(index + offset)
@@ -150,112 +151,20 @@ export default function ProjectsSection() {
                 </>
               )}
 
-              {/* Desktop Card */}
-              <div className="bg-gray-200 rounded-2xl shadow-xl p-6 h-[600px] flex flex-col">
-                <h3 className="text-2xl font-semibold text-center mb-1">{proj.title}</h3>
-                <p className="text-center text-sm text-gray-500 mb-3">{proj.timeline}</p>
-                <div className="flex flex-col md:flex-row gap-6 flex-1 overflow-hidden">
-                  {/* Left Text */}
-                  <div className="flex-1 flex flex-col justify-between text-left overflow-y-auto">
-                    <div>
-                      <ul className="text-base text-gray-700 list-disc pl-6 space-y-2 mb-4">
-                        {proj.points.map((pt, i) => (
-                          <li key={i}>{pt}</li>
-                        ))}
-                      </ul>
-                      {proj.link && (
-                        <a
-                          href={proj.link}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-blue-600 text-sm inline-block hover:underline mb-4"
-                        >
-                          View on GitHub ↗
-                        </a>
-                      )}
-                    </div>
-
-                    {proj.tech && (
-                      <div className="flex flex-wrap gap-4 mt-4">
-                        {proj.tech.map((icon, i) => (
-                          <div
-                            key={i}
-                            className="w-16 h-16 bg-white rounded-full shadow flex items-center justify-center p-2"
-                            title={iconTitles[icon] || icon.replace(".png", "")}
-                          >
-                            <img
-                              src={`/tech/${icon}`}
-                              alt={icon}
-                              className="w-full h-full object-contain"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Right Image */}
-                  <div className="flex-1 flex items-center justify-center">
-                    {proj.image && (
-                      <img
-                        src={proj.image}
-                        alt={proj.title}
-                        onClick={() => setZoomedImage(proj.image)}
-                        className="max-h-[500px] w-auto object-contain rounded-lg shadow cursor-zoom-in"
-                      />
-                    )}
-                  </div>
-                </div>
-              </div>
+              <ProjectCard proj={proj} setZoomedImage={setZoomedImage} />
             </div>
           )
         })}
       </div>
 
-      {/* 📱 Mobile Vertical Stack */}
-      <div className="md:hidden flex flex-col gap-6 w-full max-w-xl">
+      {/* Mobile Scrollable Row */}
+      <div className="md:hidden w-full overflow-x-auto snap-x snap-mandatory flex gap-6 px-4 pb-4 no-scrollbar">
         {projects.map((proj) => (
-          <div key={proj.id} className="bg-gray-200 rounded-2xl shadow-xl p-4">
-            <h3 className="text-xl font-semibold text-center mb-1">{proj.title}</h3>
-            <p className="text-center text-sm text-gray-500 mb-3">{proj.timeline}</p>
-            {proj.image && (
-              <img
-                src={proj.image}
-                alt={proj.title}
-                onClick={() => setZoomedImage(proj.image)}
-                className="w-full max-h-[300px] object-contain rounded-lg shadow cursor-zoom-in mb-4"
-              />
-            )}
-            <ul className="text-sm text-gray-700 list-disc pl-5 space-y-1 mb-2">
-              {proj.points.map((pt, i) => (
-                <li key={i}>{pt}</li>
-              ))}
-            </ul>
-            {proj.link && (
-              <a
-                href={proj.link}
-                target="_blank"
-                rel="noreferrer"
-                className="text-blue-600 text-sm inline-block hover:underline mb-2"
-              >
-                View on GitHub ↗
-              </a>
-            )}
-            <div className="flex flex-wrap gap-2 mt-3 justify-center">
-              {proj.tech.map((icon, i) => (
-                <div
-                  key={i}
-                  className="w-10 h-10 bg-white rounded-full shadow flex items-center justify-center p-1"
-                  title={iconTitles[icon] || icon.replace(".png", "")}
-                >
-                  <img
-                    src={`/tech/${icon}`}
-                    alt={icon}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              ))}
-            </div>
+          <div
+            key={proj.id}
+            className="min-w-[90vw] snap-center flex-shrink-0"
+          >
+            <ProjectCard proj={proj} setZoomedImage={setZoomedImage} />
           </div>
         ))}
       </div>
@@ -276,3 +185,63 @@ export default function ProjectsSection() {
     </section>
   )
 }
+
+const ProjectCard = ({ proj, setZoomedImage }) => (
+  <div className="bg-gray-200 rounded-2xl shadow-xl p-6 h-auto flex flex-col">
+    <h3 className="text-xl sm:text-2xl font-semibold text-center mb-1">{proj.title}</h3>
+    <p className="text-center text-sm text-gray-500 mb-3">{proj.timeline}</p>
+    <div className="flex flex-col md:flex-row gap-6 flex-1">
+      {/* Description */}
+      <div className="flex-1 flex flex-col justify-between text-left">
+        <div>
+          <ul className="text-sm sm:text-base text-gray-700 list-disc pl-6 space-y-2 mb-4">
+            {proj.points.map((pt, i) => (
+              <li key={i}>{pt}</li>
+            ))}
+          </ul>
+          {proj.link && (
+            <a
+              href={proj.link}
+              target="_blank"
+              rel="noreferrer"
+              className="text-blue-600 text-sm inline-block hover:underline mb-4"
+            >
+              View on GitHub ↗
+            </a>
+          )}
+        </div>
+        {proj.tech && (
+          <div className="flex flex-wrap gap-4 mt-4">
+            {proj.tech.map((icon, i) => (
+              <div
+                key={i}
+                className="w-12 h-12 bg-white rounded-full shadow flex items-center justify-center p-2"
+                title={iconTitles[icon] || icon.replace(".png", "")}
+              >
+                <img
+                  src={`/tech/${icon}`}
+                  alt={icon}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Image */}
+      {proj.image && (
+        <div className="flex-1 flex items-center justify-center">
+          <img
+            src={proj.image}
+            alt={proj.title}
+            onClick={() => setZoomedImage(proj.image)}
+            className="max-h-[300px] md:max-h-[500px] w-auto object-contain rounded-lg shadow cursor-zoom-in"
+          />
+        </div>
+      )}
+    </div>
+  </div>
+)
+
+export default ProjectsSection
