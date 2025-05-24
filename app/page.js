@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="snap-y snap-mandatory overflow-y-scroll h-screen pt-20">
+      <main className="snap-y snap-mandatory">
         <IntroSection />
         <ExperienceSection />
         <ProjectsSection />

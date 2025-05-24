@@ -1,6 +1,5 @@
 'use client'
 import { motion } from 'framer-motion'
-import { useRef } from 'react'
 
 const ExperienceCard = ({ title, company, date, points, projectId, logo }) => (
   <motion.div
@@ -8,7 +7,7 @@ const ExperienceCard = ({ title, company, date, points, projectId, logo }) => (
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.4 }}
     viewport={{ once: true }}
-    className="min-w-[300px] max-w-xs sm:max-w-sm bg-white rounded-xl shadow p-4 mx-2 flex-shrink-0
+    className="w-full max-w-md mx-auto bg-white rounded-xl shadow p-4 flex-shrink-0
                transform transition-all duration-300 scale-95 opacity-60 hover:scale-105 hover:opacity-100 
                hover:z-20 hover:shadow-lg hover:shadow-gray-400 hover:bg-gray-50"
   >
@@ -45,7 +44,6 @@ const ExperienceCard = ({ title, company, date, points, projectId, logo }) => (
 
 const TimelineItem = ({ title, company, date, points, projectId, logo, isLeft }) => (
   <div className="relative w-full grid grid-cols-9 items-start gap-2 mb-4 transition-all z-10 group">
-    {/* Left Card */}
     <div className={`col-span-4 ${isLeft ? '' : 'hidden md:block'}`}>
       {isLeft && (
         <motion.div
@@ -81,7 +79,6 @@ const TimelineItem = ({ title, company, date, points, projectId, logo, isLeft })
       )}
     </div>
 
-    {/* Center Logo */}
     <div className="col-span-1 flex flex-col items-center relative z-10">
       <div className="w-16 h-16 rounded-full border-4 border-white shadow bg-white 
                       flex items-center justify-center transform scale-95 
@@ -96,7 +93,6 @@ const TimelineItem = ({ title, company, date, points, projectId, logo, isLeft })
       </div>
     </div>
 
-    {/* Right Card */}
     <div className={`col-span-4 ${isLeft ? 'hidden md:block' : ''}`}>
       {!isLeft && (
         <motion.div
@@ -192,17 +188,18 @@ export default function ExperienceSection() {
 
       {/* Desktop Timeline */}
       <div className="relative max-w-6xl mx-auto hidden md:flex flex-col gap-2">
-        {/* Central vertical line */}
         <div className="absolute top-0 bottom-0 left-1/2 transform -translate-x-1/2 w-1 bg-gray-500 z-0" />
         {experiences.map((exp, i) => (
           <TimelineItem key={i} {...exp} isLeft={i % 2 === 0} />
         ))}
       </div>
 
-      {/* Mobile Horizontal Scroll */}
-      <div className="md:hidden flex overflow-x-auto no-scrollbar snap-x snap-mandatory px-2 -mx-2 pb-4">
+      {/* Mobile Horizontal Swipe Scroll */}
+      <div className="md:hidden flex overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth w-full">
         {experiences.map((exp, i) => (
-          <ExperienceCard key={i} {...exp} />
+          <div key={i} className="snap-center shrink-0 w-full px-4">
+            <ExperienceCard {...exp} />
+          </div>
         ))}
       </div>
     </section>
