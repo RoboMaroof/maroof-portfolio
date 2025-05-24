@@ -215,7 +215,7 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="snap-start min-h-screen-svh md:min-h-screen bg-gray-200 px-4 sm:px-6 pt-[72px] md:pt-24"
+      className="snap-start min-h-screen-svh md:min-h-screen bg-gray-200 px-4 sm:px-6 pt-[72px] md:pt-24 pb-[calc(4rem+env(safe-area-inset-bottom))]"
     >
       <h2 className="text-3xl font-bold text-center mb-8 tracking-[0.35em] text-gray-700">
         EXPERIENCE
@@ -230,7 +230,7 @@ export default function ExperienceSection() {
       </div>
 
       {/* Mobile Horizontal Swipe Scroll */}
-      <div className="md:hidden relative w-full h-screen-svh overflow-hidden">
+      <div className="md:hidden relative w-full h-screen-svh pb-[env(safe-area-inset-bottom)] overflow-hidden">
         {index > 0 && (
           <button
             onClick={() => setIndex(index - 1)}
