@@ -210,7 +210,7 @@ export default function ProjectsSection() {
         <div className="flex transition-transform duration-500 w-full" style={{ transform: `translateX(-${index * 100}%)` }}>
           {projects.map((proj) => (
             <div key={proj.id}
-              className="min-w-full h-screen-svh snap-center bg-gray-100 rounded-xl shadow-md p-4 flex flex-col gap-2 overflow-y-auto"
+            className="min-w-full snap-center bg-gray-100 rounded-xl shadow-md p-4 flex flex-col gap-4"
             >
               <div className="flex-1 flex flex-col gap-3">
                 <div>
