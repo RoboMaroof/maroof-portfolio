@@ -257,7 +257,7 @@ export default function ExperienceSection() {
           {experiences.map((exp, i) => (
             <div
               key={i}
-              className="min-w-full h-full snap-center px-4 flex items-center justify-center"
+              className="min-w-full h-full snap-center px-4 flex items-start justify-center pt-2"
             >
               <div className="w-full max-w-md max-h-full flex items-center justify-center">
                 <ExperienceCard {...exp} />
