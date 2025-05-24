@@ -10,8 +10,9 @@ const publications = [
     subtitle: 'IEEE ICIP 2024',
     description: 'A deep learning method for detecting renal cell carcinoma using histopathological images.',
     link: 'https://ieeexplore.ieee.org/document/10647236',
-    embedType: 'pdf',
-    embed: 'https://www.biorxiv.org/content/10.1101/2024.02.12.577550v1.full.pdf'
+    embedType: 'images',
+    imageCount: 7,
+    imagePrefix: '/docs/paper_images/page_',
   },
   {
     id: 'thesis',
@@ -125,7 +126,7 @@ export default function PublicationsSection() {
           </button>
         )}
 
-        <div className="flex transition-transform duration-500 w-full" style={{ transform: `translateX(-${index * 100}%)` }}>
+        <div className="flex trans  ition-transform duration-500 w-full" style={{ transform: `translateX(-${index * 100}%)` }}>
           {publications.map((pub) => (
             <div
               key={pub.id}
