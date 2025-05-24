@@ -9,9 +9,9 @@ const ExperienceCard = ({ title, company, date, points, projectId, logo }) => (
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.4 }}
     viewport={{ once: true }}
-    className="w-full max-w-md mx-auto bg-white rounded-xl shadow p-4 flex-shrink-0
-               transform transition-all duration-300 scale-95 opacity-60 hover:scale-105 hover:opacity-100 
-               hover:z-20 hover:shadow-lg hover:shadow-gray-400 hover:bg-gray-50"
+    className="w-full max-w-md h-full mx-auto bg-white rounded-xl shadow p-4 flex flex-col justify-center flex-shrink-0
+           transform transition-all duration-300 scale-95 opacity-60 hover:scale-105 hover:opacity-100 
+           hover:z-20 hover:shadow-lg hover:shadow-gray-400 hover:bg-gray-50"
   >
     <div className="flex items-center gap-3 mb-2">
       <img
@@ -199,7 +199,7 @@ export default function ExperienceSection() {
       </div>
 
       {/* Mobile Horizontal Swipe Scroll */}
-      <div className="md:hidden relative flex overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth w-full">
+      <div className="md:hidden relative w-full h-[100dvh] overflow-hidden">
         {index > 0 && (
           <button
             onClick={() => setIndex((index - 1 + experiences.length) % experiences.length)}
@@ -219,17 +219,22 @@ export default function ExperienceSection() {
           </button>
         )}
 
-        <div className="w-full flex transition-transform duration-500" style={{ transform: `translateX(-${index * 100}%)` }}>
+        <div
+          className="flex transition-transform duration-500 w-full h-full"
+          style={{ transform: `translateX(-${index * 100}%)` }}
+        >
           {experiences.map((exp, i) => (
             <div
               key={i}
-              className="min-w-full h-[100dvh] snap-center px-4 flex items-center justify-center"
+              className="min-w-full h-full snap-center px-4 flex items-center justify-center"
             >
-              <ExperienceCard {...exp} />
+              <div className="w-full max-w-md max-h-full flex items-center justify-center">
+                <ExperienceCard {...exp} />
+              </div>
             </div>
           ))}
         </div>
-      </div>
+      </div>    
     </section>
   )
 }
