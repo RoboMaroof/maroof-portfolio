@@ -199,7 +199,7 @@ export default function ExperienceSection() {
       </div>
 
       {/* Mobile Horizontal Swipe Scroll */}
-      <div className="md:hidden relative w-full h-[100dvh] overflow-hidden">
+      <div className="md:hidden relative w-full h-screen-svh overflow-hidden">
         {index > 0 && (
           <button
             onClick={() => setIndex((index - 1 + experiences.length) % experiences.length)}
