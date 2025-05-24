@@ -34,7 +34,7 @@ export default function PublicationsSection() {
   return (
     <section
       id="publications"
-      className="min-h-screen-svh md:min-h-screen bg-gray-200 px-4 sm:px-6 pt-[72px] md:pt-24 pb-16 flex flex-col items-center"
+      className="min-h-screen-svh md:min-h-screen bg-gray-200 px-4 sm:px-6 pt-[72px] md:pt-24 pb-[calc(2rem+env(safe-area-inset-bottom))] flex flex-col items-center"
     >
       <h2 className="text-3xl font-bold text-center mb-8 tracking-[0.35em] text-gray-700">
         PUBLICATIONS
@@ -82,7 +82,7 @@ export default function PublicationsSection() {
           <div className="w-full h-[620px] overflow-y-auto rounded border shadow-inner p-2 bg-gray-100">
             {pub.embedType === 'pdf' ? (
               <iframe
-                src={pub.embed}
+                src={pub.link}
                 title={pub.title}
                 width="100%"
                 height="100%"
@@ -105,8 +105,8 @@ export default function PublicationsSection() {
         </div>
       </div>
 
-      {/* 📱 Mobile Horizontal Scroll (Updated) */}
-      <div className="md:hidden relative w-full overflow-hidden">
+      {/* 📱 Mobile Carousel */}
+      <div className="md:hidden relative w-full h-screen-svh overflow-hidden pt-2">
         {index > 0 && (
           <button
             onClick={() => setIndex((index - 1 + total) % total)}
@@ -126,13 +126,10 @@ export default function PublicationsSection() {
           </button>
         )}
 
-        <div className="flex trans  ition-transform duration-500 w-full" style={{ transform: `translateX(-${index * 100}%)` }}>
+        <div className="flex transition-transform duration-500 w-full" style={{ transform: `translateX(-${index * 100}%)` }}>
           {publications.map((pub) => (
-            <div
-              key={pub.id}
-              className="min-w-full h-screen-svh snap-center bg-white rounded-xl shadow-lg p-4 flex flex-col justify-center"
-            >
-              <div className="flex flex-col gap-3 overflow-y-auto">
+            <div key={pub.id} className="min-w-full h-full snap-center px-4 flex items-start justify-center pt-2">
+              <div className="w-full max-w-md h-full bg-white rounded-2xl shadow-md p-4 flex flex-col gap-4 overflow-hidden">
                 <div className="flex items-start gap-2">
                   <FaFileAlt className="text-xl text-gray-700 mt-1" />
                   <div>
@@ -148,6 +145,29 @@ export default function PublicationsSection() {
                       View Document ↗
                     </a>
                   </div>
+                </div>
+                <div className="flex-1 overflow-y-auto bg-gray-100 rounded border shadow-inner p-2 mt-2">
+                  {pub.embedType === 'pdf' ? (
+                    <iframe
+                      src={pub.link}
+                      title={pub.title}
+                      width="100%"
+                      height="100%"
+                      className="rounded shadow border"
+                      allow="autoplay"
+                    ></iframe>
+                  ) : (
+                    <div className="flex flex-col items-center space-y-4">
+                      {Array.from({ length: pub.imageCount }, (_, i) => (
+                        <img
+                          key={i}
+                          src={`${pub.imagePrefix}${i + 1}.png`}
+                          alt={`Page ${i + 1}`}
+                          className="w-full max-w-full object-contain rounded"
+                        />
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
