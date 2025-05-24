@@ -10,9 +10,9 @@ const ExperienceCard = ({ title, company, date, points, projectId, logo }) => (
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.4 }}
     viewport={{ once: true }}
-    className="w-full max-w-md max-h-[80vh] md:max-h-none mx-auto bg-white rounded-xl shadow p-4 flex flex-col flex-shrink-0 
-               overflow-y-auto transform transition-all duration-300 scale-95 opacity-60 
-               hover:scale-105 hover:opacity-100 hover:z-20 hover:shadow-lg hover:shadow-gray-400 hover:bg-gray-50"
+    className="w-full max-w-md h-[calc(100svh-144px-env(safe-area-inset-bottom))] md:h-auto mx-auto bg-white rounded-xl shadow p-4 flex flex-col 
+              transform transition-all duration-300 scale-95 opacity-60 
+              hover:scale-105 hover:opacity-100 hover:z-20 hover:shadow-lg hover:shadow-gray-400 hover:bg-gray-50"
   >
     <div className="flex items-center gap-3 mb-2">
       <img
