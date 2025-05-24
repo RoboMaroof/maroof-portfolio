@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
+import clsx from 'clsx'
 
 const ExperienceCard = ({ title, company, date, points, projectId, logo }) => (
   <motion.div
@@ -44,93 +45,119 @@ const ExperienceCard = ({ title, company, date, points, projectId, logo }) => (
   </motion.div>
 )
 
-const TimelineItem = ({ title, company, date, points, projectId, logo, isLeft }) => (
-  <div className="relative w-full grid grid-cols-9 items-start gap-2 mb-4 transition-all z-10 group">
-    <div className={`col-span-4 ${isLeft ? '' : 'hidden md:block'}`}>
-      {isLeft && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          viewport={{ once: true }}
-          className="bg-white rounded-xl shadow p-4 w-full ml-auto max-w-[95%] 
-                    transform transition-all duration-300 scale-95 opacity-60 
-                    group-hover:scale-105 group-hover:opacity-100 group-hover:z-20 
-                    group-hover:shadow-lg group-hover:shadow-gray-400 group-hover:bg-gray-50"
-        >
-          <h3 className="text-lg font-bold">{title}</h3>
-          <p className="text-sm text-black-600">{company}</p>
-          <p className="text-xs text-gray-400 mb-2">{date}</p>
-          <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1">
-            {points.map((pt, i) => (
-              <li key={i}>{pt}</li>
-            ))}
-          </ul>
-          {projectId && (
-            <button
-              onClick={() => {
-                const el = document.getElementById(projectId)
-                if (el) el.scrollIntoView({ behavior: 'smooth' })
-              }}
-              className="text-blue-600 text-sm mt-2 inline-block hover:underline"
-            >
-              View Project ↘
-            </button>
-          )}
-        </motion.div>
-      )}
-    </div>
+const TimelineItem = ({ title, company, date, points, projectId, logo, isLeft, index }) => {
+  const isLast = index === 3
 
-    <div className="col-span-1 flex flex-col items-center relative z-10">
-      <div className="w-16 h-16 rounded-full border-4 border-white shadow bg-white 
-                      flex items-center justify-center transform scale-95 
-                      transition-all duration-300 
-                      group-hover:scale-110 group-hover:shadow-md group-hover:shadow-gray-400"
-      >
-        <img
-          src={`/images/${logo}`}
-          alt={company}
-          className="w-10 h-10 object-contain"
-        />
+  return (
+    <div className="relative w-full grid grid-cols-9 items-start gap-2 mb-4 transition-all z-10 group">
+      <div className={`col-span-4 ${isLeft ? '' : 'hidden md:block'}`}>
+        {isLeft && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            viewport={{ once: true }}
+            className={clsx(
+              "bg-white rounded-xl shadow p-4 w-full ml-auto max-w-[95%]",
+              "transform transition-all duration-300 scale-95 opacity-60 overflow-hidden",
+              "group-hover:scale-105 group-hover:opacity-100 group-hover:z-20",
+              "group-hover:shadow-lg group-hover:shadow-gray-400 group-hover:bg-gray-50",
+              isLast ? "group-hover:-translate-y-8" : "group-hover:translate-y-4"
+            )}
+          >
+            <h3 className="text-lg font-bold">{title}</h3>
+            <p className="text-sm text-black-600">{company}</p>
+            <p className="text-xs text-gray-400 mb-2">{date}</p>
+
+            <ul
+              className={clsx(
+                "list-disc pl-5 text-sm text-gray-700 space-y-1 transition-all duration-300",
+                "overflow-hidden",
+                "line-clamp-2 group-hover:line-clamp-none"
+              )}
+            >
+              {points.map((pt, i) => (
+                <li key={i}>{pt}</li>
+              ))}
+            </ul>
+
+            {projectId && (
+              <button
+                onClick={() => {
+                  const el = document.getElementById(projectId)
+                  if (el) el.scrollIntoView({ behavior: 'smooth' })
+                }}
+                className="text-blue-600 text-sm mt-2 inline-block hover:underline"
+              >
+                View Project ↘
+              </button>
+            )}
+          </motion.div>
+        )}
+      </div>
+
+      <div className="col-span-1 flex flex-col items-center relative z-10">
+        <div className="w-16 h-16 rounded-full border-4 border-white shadow bg-white 
+                        flex items-center justify-center transform scale-95 
+                        transition-all duration-300 
+                        group-hover:scale-110 group-hover:shadow-md group-hover:shadow-gray-400"
+        >
+          <img
+            src={`/images/${logo}`}
+            alt={company}
+            className="w-10 h-10 object-contain"
+          />
+        </div>
+      </div>
+
+      <div className={`col-span-4 ${isLeft ? 'hidden md:block' : ''}`}>
+        {!isLeft && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            viewport={{ once: true }}
+            className={clsx(
+              "bg-white rounded-xl shadow p-4 w-full mr-auto max-w-[95%]",
+              "transform transition-all duration-300 scale-95 opacity-60 overflow-hidden",
+              "group-hover:scale-105 group-hover:opacity-100 group-hover:z-20",
+              "group-hover:shadow-lg group-hover:shadow-gray-400 group-hover:bg-gray-50",
+              isLast ? "group-hover:-translate-y-8" : "group-hover:translate-y-4"
+            )}
+          >
+            <h3 className="text-lg font-bold">{title}</h3>
+            <p className="text-sm text-black-600">{company}</p>
+            <p className="text-xs text-gray-400 mb-2">{date}</p>
+
+            <ul
+              className={clsx(
+                "list-disc pl-5 text-sm text-gray-700 space-y-1 transition-all duration-300",
+                "overflow-hidden",
+                "line-clamp-2 group-hover:line-clamp-none"
+              )}
+            >
+              {points.map((pt, i) => (
+                <li key={i}>{pt}</li>
+              ))}
+            </ul>
+
+            {projectId && (
+              <button
+                onClick={() => {
+                  const el = document.getElementById(projectId)
+                  if (el) el.scrollIntoView({ behavior: 'smooth' })
+                }}
+                className="text-blue-600 text-sm mt-2 inline-block hover:underline"
+              >
+                View Project ↘
+              </button>
+            )}
+          </motion.div>
+        )}
       </div>
     </div>
-
-    <div className={`col-span-4 ${isLeft ? 'hidden md:block' : ''}`}>
-      {!isLeft && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          viewport={{ once: true }}
-          className="bg-white rounded-xl shadow p-4 w-full mr-auto max-w-[95%] 
-                    transform transition-all duration-300 scale-95 opacity-60 
-                    group-hover:scale-105 group-hover:opacity-100 group-hover:z-20 
-                    group-hover:shadow-lg group-hover:shadow-gray-400 group-hover:bg-gray-50"
-        >
-          <h3 className="text-lg font-bold">{title}</h3>
-          <p className="text-sm text-black-600">{company}</p>
-          <p className="text-xs text-gray-400 mb-2">{date}</p>
-          <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1">
-            {points.map((pt, i) => (
-              <li key={i}>{pt}</li>
-            ))}
-          </ul>
-          {projectId && (
-            <button
-              onClick={() => {
-                const el = document.getElementById(projectId)
-                if (el) el.scrollIntoView({ behavior: 'smooth' })
-              }}
-              className="text-blue-600 text-sm mt-2 inline-block hover:underline"
-            >
-              View Project ↘
-            </button>
-          )}
-        </motion.div>
-      )}
-    </div>
-  </div>
-)
+  )
+}
 
 export default function ExperienceSection() {
   const experiences = [
@@ -139,19 +166,22 @@ export default function ExperienceSection() {
       company: 'Audi AG',
       date: 'Oct 2024 – Present',
       points: [
-        'Researched and fine-tuned small language models.',
-        'Applied PEFT, LoRA, PTQ, ONNX acceleration.',
+        'Topic: Optimization of Small Language Models for Embedded Voice Assistance.',
+        'Research and develop language models tailored for specific use cases, utilizing fine-tuning, model compression and acceleration techniques.',
+        'Built synthetic datasets simulating realistic vehicle assistant queries and tool usage.',
       ],
       projectId: 'llm-optimization',
       logo: 'audi.jpg',
     },
     {
-      title: 'Machine Learning Intern',
+      title: 'Internship – ChatGPT TTS Integration',
       company: 'Audi AG',
       date: 'Apr 2024 – Sep 2024',
       points: [
-        'Integrated ChatGPT into speech processing.',
-        'Automated evaluation and CI/CD integration.',
+        'Project: ChatGPT integration into online speech processing of voice assistant.',
+        'Developed test datasets and evaluated multilingual language models using LLMs for text-matching and language processing tasks.',
+        'Conducted performance testing for scalable backends in automotive speech systems and automated reporting in CI/CD pipelines.',
+        'Contributed to Agile (Scrum) development processes and streamlined data analysis workflows.',
       ],
       projectId: 'chatgpt-tts',
       logo: 'audi.jpg',
@@ -161,7 +191,8 @@ export default function ExperienceSection() {
       company: 'RWTH Aachen University',
       date: 'Aug 2023 – Mar 2024',
       points: [
-        'Developed DL models for tumor detection.',
+        'Develop and test deep learning models for detection, classification and grading of tumor in high resolution images.',
+        'Literature and dataset research.',
         'Published in IEEE ICIP 2024.',
       ],
       projectId: 'renal-cancer',
@@ -172,8 +203,8 @@ export default function ExperienceSection() {
       company: 'Mercedes-Benz R&D India',
       date: 'Dec 2015 – Jul 2022',
       points: [
-        'Developed Python tools for automation.',
-        'Led automotive exterior design projects.',
+        'Developed Python-based automation tools for design and validation processes.',
+        'Collaborated with cross-functional teams to prototype and design cost effective, manufacturable automotive exterior parts.',
       ],
       logo: 'mercedes.png',
     },
@@ -194,7 +225,7 @@ export default function ExperienceSection() {
       <div className="relative max-w-6xl mx-auto hidden md:flex flex-col gap-2">
         <div className="absolute top-0 bottom-0 left-1/2 transform -translate-x-1/2 w-1 bg-gray-500 z-0" />
         {experiences.map((exp, i) => (
-          <TimelineItem key={i} {...exp} isLeft={i % 2 === 0} />
+          <TimelineItem key={i} {...exp} index={i} isLeft={i % 2 === 0} />
         ))}
       </div>
 
