@@ -9,9 +9,9 @@ const ExperienceCard = ({ title, company, date, points, projectId, logo }) => (
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.4 }}
     viewport={{ once: true }}
-    className="w-full max-w-md h-full mx-auto bg-white rounded-xl shadow p-4 flex flex-col justify-center flex-shrink-0
-           transform transition-all duration-300 scale-95 opacity-60 hover:scale-105 hover:opacity-100 
-           hover:z-20 hover:shadow-lg hover:shadow-gray-400 hover:bg-gray-50"
+    className="w-full max-w-md max-h-[80vh] md:max-h-none mx-auto bg-white rounded-xl shadow p-4 flex flex-col flex-shrink-0 
+               overflow-y-auto transform transition-all duration-300 scale-95 opacity-60 
+               hover:scale-105 hover:opacity-100 hover:z-20 hover:shadow-lg hover:shadow-gray-400 hover:bg-gray-50"
   >
     <div className="flex items-center gap-3 mb-2">
       <img
@@ -202,7 +202,7 @@ export default function ExperienceSection() {
       <div className="md:hidden relative w-full h-screen-svh overflow-hidden">
         {index > 0 && (
           <button
-            onClick={() => setIndex((index - 1 + experiences.length) % experiences.length)}
+            onClick={() => setIndex(index - 1)}
             className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-20"
             aria-label="Previous"
           >
@@ -211,7 +211,7 @@ export default function ExperienceSection() {
         )}
         {index < experiences.length - 1 && (
           <button
-            onClick={() => setIndex((index + 1) % experiences.length)}
+            onClick={() => setIndex(index + 1)}
             className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-20"
             aria-label="Next"
           >
@@ -234,7 +234,7 @@ export default function ExperienceSection() {
             </div>
           ))}
         </div>
-      </div>    
+      </div>
     </section>
   )
 }
