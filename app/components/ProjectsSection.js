@@ -112,7 +112,7 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="snap-start min-h-[100dvh] md:min-h-screen bg-white px-4 pt-[72px] md:pt-24"
+      className="snap-start min-h-screen-svh md:min-h-screen bg-white px-4 pt-[72px] md:pt-24"
     >
       <h2 className="text-3xl font-bold text-center mb-8 tracking-[0.35em] text-gray-700">
         PROJECTS
@@ -237,7 +237,7 @@ export default function ProjectsSection() {
           {projects.map((proj, i) => (
             <div
               key={proj.id}
-              className="min-w-full h-[100dvh] snap-center bg-gray-100 rounded-xl shadow-md p-4 flex flex-col"
+              className="min-w-full h-screen-svh snap-center bg-gray-100 rounded-xl shadow-md p-4 flex flex-col"
             >
               <h3 className="text-xl font-semibold text-center mb-1">{proj.title}</h3>
               <p className="text-center text-sm text-gray-500 mb-3">{proj.timeline}</p>

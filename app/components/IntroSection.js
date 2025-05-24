@@ -5,7 +5,7 @@ export default function IntroSection() {
   return (
     <section 
       id="about"
-      className="min-h-[100dvh] md:min-h-screen bg-white px-4 sm:px-6 pt-[72px] md:pt-24 pb-16 flex flex-col items-center"
+      className="min-h-screen-svh md:min-h-screen bg-white px-4 sm:px-6 pt-[72px] md:pt-24 pb-16 flex flex-col items-center"
     >
       <h2 className="text-3xl font-bold text-center mb-8 tracking-[0.35em] text-gray-700">
         ABOUT

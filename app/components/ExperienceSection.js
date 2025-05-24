@@ -184,7 +184,7 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="snap-start min-h-[100dvh] md:min-h-screen bg-gray-200 px-4 sm:px-6 pt-[72px] md:pt-24"
+      className="snap-start min-h-screen-svh md:min-h-screen bg-gray-200 px-4 sm:px-6 pt-[72px] md:pt-24"
     >
       <h2 className="text-3xl font-bold text-center mb-8 tracking-[0.35em] text-gray-700">
         EXPERIENCE

@@ -33,7 +33,7 @@ export default function PublicationsSection() {
   return (
     <section
       id="publications"
-      className="min-h-[100dvh] md:min-h-screen bg-gray-200 px-4 sm:px-6 pt-[72px] md:pt-24 pb-16 flex flex-col items-center"
+      className="min-h-screen-svh md:min-h-screen bg-gray-200 px-4 sm:px-6 pt-[72px] md:pt-24 pb-16 flex flex-col items-center"
     >
       <h2 className="text-3xl font-bold text-center mb-8 tracking-[0.35em] text-gray-700">
         PUBLICATIONS
@@ -129,7 +129,7 @@ export default function PublicationsSection() {
           {publications.map((pub, i) => (
             <div
               key={pub.id}
-              className="min-w-full h-[100dvh] snap-center bg-white rounded-xl shadow-lg p-4 flex flex-col justify-between"
+              className="min-w-full h-screen-svh snap-center bg-white rounded-xl shadow-lg p-4 flex flex-col justify-between"
             >
               <div className="flex items-start gap-2 mb-2">
                 <FaFileAlt className="text-xl text-gray-700 mt-1" />
