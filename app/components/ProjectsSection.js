@@ -228,7 +228,7 @@ export default function ProjectsSection() {
                   <div className="flex flex-wrap gap-2 justify-center pb-2">
                     {proj.tech.map((icon, i) => (
                       <div key={i}
-                        className="w-10 h-10 bg-white rounded-full shadow flex items-center justify-center p-1.5"
+                        className="w-10 h-10 bg-white rounded-full shadow flex items-start justify-center p-1.5"
                         title={iconTitles[icon] || icon.replace(".png", "")}>
                         <img src={`/tech/${icon}`} alt={icon} className="w-full h-full object-contain" />
                       </div>
