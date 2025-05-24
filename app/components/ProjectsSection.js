@@ -111,17 +111,18 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="snap-start min-h-screen-svh md:min-h-screen bg-white px-4 pt-[56px] md:pt-24"
+      className="snap-start min-h-screen-svh md:min-h-screen bg-white px-4 pt-[72px] md:pt-24"
     >
-      <h2 className="text-3xl font-bold text-center mb-6 tracking-[0.35em] text-gray-700">
+      <h2 className="text-3xl font-bold text-center mb-8 tracking-[0.35em] text-gray-700">
         PROJECTS
       </h2>
 
-      {/* Desktop */}
+      {/* 💻 Desktop Version */}
       <div className="hidden md:flex relative w-full max-w-6xl h-[700px] items-center justify-center mx-auto">
-        {[-1, 0, 1].map(offset => {
+        {[ -1, 0, 1 ].map(offset => {
           const proj = getProject(index + offset)
           const isCurrent = offset === 0
+
           return (
             <div
               key={proj.id}
@@ -144,10 +145,12 @@ export default function ProjectsSection() {
                   </button>
                 </>
               )}
+
               <div className="bg-gray-200 rounded-2xl shadow-xl p-6 h-[600px] flex flex-col">
                 <h3 className="text-2xl font-semibold text-center mb-1">{proj.title}</h3>
                 <p className="text-center text-sm text-gray-500 mb-3">{proj.timeline}</p>
                 <div className="flex flex-col md:flex-row gap-6 flex-1">
+                  {/* Left */}
                   <div className="flex-1 flex flex-col justify-between text-left">
                     <div>
                       <ul className="text-base text-gray-700 list-disc pl-6 space-y-2 mb-4">
@@ -171,6 +174,8 @@ export default function ProjectsSection() {
                       </div>
                     )}
                   </div>
+
+                  {/* Right */}
                   <div className="flex-1 flex items-center justify-center">
                     {proj.image && (
                       <img src={proj.image} alt={proj.title}
@@ -185,7 +190,7 @@ export default function ProjectsSection() {
         })}
       </div>
 
-      {/* Mobile */}
+      {/* 📱 Mobile Version */}
       <div className="md:hidden relative flex overflow-hidden w-full">
         {index > 0 && (
           <button onClick={() => setIndex((index - 1 + total) % total)}
@@ -201,41 +206,44 @@ export default function ProjectsSection() {
             <ArrowRight size={32} className="text-gray-700" />
           </button>
         )}
+
         <div className="flex transition-transform duration-500 w-full" style={{ transform: `translateX(-${index * 100}%)` }}>
           {projects.map((proj) => (
             <div key={proj.id}
-              className="min-w-full snap-center bg-gray-100 rounded-xl shadow-md p-4 flex flex-col justify-start h-screen-svh"
+              className="min-w-full h-screen-svh snap-center bg-gray-100 rounded-xl shadow-md p-4 flex flex-col gap-2 overflow-y-auto"
             >
-              <h3 className="text-xl font-semibold text-center mb-1">{proj.title}</h3>
-              <p className="text-center text-sm text-gray-500 mb-3">{proj.timeline}</p>
-              <div className="flex-1 flex flex-col justify-start">
-                <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-2">
-                  {proj.points.map((pt, i) => <li key={i}>{pt}</li>)}
-                </ul>
-                {proj.link && (
-                  <a href={proj.link} target="_blank" rel="noreferrer"
-                    className="text-blue-600 text-sm inline-block hover:underline mb-2">
-                    View on GitHub ↗
-                  </a>
+              <div className="flex-1 flex flex-col gap-3">
+                <div>
+                  <h3 className="text-xl font-semibold text-center mb-1">{proj.title}</h3>
+                  <p className="text-center text-sm text-gray-500 mb-2">{proj.timeline}</p>
+                  <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-2">
+                    {proj.points.map((pt, i) => <li key={i}>{pt}</li>)}
+                  </ul>
+                  {proj.link && (
+                    <a href={proj.link} target="_blank" rel="noreferrer"
+                      className="text-blue-600 text-sm inline-block hover:underline mb-2">
+                      View on GitHub ↗
+                    </a>
+                  )}
+                </div>
+                {proj.tech && (
+                  <div className="flex flex-wrap gap-2 justify-center pb-2">
+                    {proj.tech.map((icon, i) => (
+                      <div key={i}
+                        className="w-10 h-10 bg-white rounded-full shadow flex items-center justify-center p-1.5"
+                        title={iconTitles[icon] || icon.replace(".png", "")}>
+                        <img src={`/tech/${icon}`} alt={icon} className="w-full h-full object-contain" />
+                      </div>
+                    ))}
+                  </div>
                 )}
               </div>
-              {proj.tech && (
-                <div className="flex flex-wrap gap-2 justify-center mt-2">
-                  {proj.tech.map((icon, i) => (
-                    <div key={i}
-                      className="w-10 h-10 bg-white rounded-full shadow flex items-center justify-center p-1.5"
-                      title={iconTitles[icon] || icon.replace(".png", "")}>
-                      <img src={`/tech/${icon}`} alt={icon} className="w-full h-full object-contain" />
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           ))}
         </div>
       </div>
 
-      {/* Zoom Modal */}
+      {/* Zoom Modal for Desktop */}
       {zoomedImage && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 cursor-zoom-out"
           onClick={() => setZoomedImage(null)}>
