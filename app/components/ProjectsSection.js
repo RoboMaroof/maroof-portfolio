@@ -111,7 +111,7 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="snap-start min-h-screen-svh md:min-h-screen bg-white px-4 pt-[72px] md:pt-24"
+      className="snap-start min-h-screen-svh md:min-h-screen bg-white px-4 pt-[72px] md:pt-24 pb-[calc(2rem+env(safe-area-inset-bottom))]"
     >
       <h2 className="text-3xl font-bold text-center mb-8 tracking-[0.35em] text-gray-700">
         PROJECTS
@@ -191,7 +191,7 @@ export default function ProjectsSection() {
       </div>
 
       {/* 📱 Mobile Version */}
-      <div className="md:hidden relative flex overflow-hidden w-full">
+      <div className="md:hidden relative flex overflow-hidden w-full h-[calc(100svh-144px-env(safe-area-inset-bottom))] items-start">
         {index > 0 && (
           <button onClick={() => setIndex((index - 1 + total) % total)}
             className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-20"
@@ -210,7 +210,7 @@ export default function ProjectsSection() {
         <div className="flex transition-transform duration-500 w-full" style={{ transform: `translateX(-${index * 100}%)` }}>
           {projects.map((proj) => (
             <div key={proj.id}
-            className="min-w-full snap-center bg-gray-100 rounded-xl shadow-md p-4 flex flex-col gap-4"
+            className="min-w-full snap-center bg-gray-100 rounded-xl shadow-md p-4 flex flex-col gap-4 h-full"
             >
               <div className="flex-1 flex flex-col gap-3">
                 <div>
