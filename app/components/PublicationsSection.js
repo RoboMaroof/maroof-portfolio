@@ -126,10 +126,10 @@ export default function PublicationsSection() {
         )}
 
         <div className="flex transition-transform duration-500 w-full" style={{ transform: `translateX(-${index * 100}%)` }}>
-          {publications.map((pub, i) => (
+          {publications.map((pub) => (
             <div
               key={pub.id}
-              className="min-w-full h-screen-svh snap-center bg-white rounded-xl shadow-lg p-4 flex flex-col justify-between"
+              className="min-w-full snap-center bg-white rounded-xl shadow-lg p-4 flex flex-col justify-between"
             >
               <div className="flex items-start gap-2 mb-2">
                 <FaFileAlt className="text-xl text-gray-700 mt-1" />
@@ -147,31 +147,7 @@ export default function PublicationsSection() {
                   </a>
                 </div>
               </div>
-
-              {/* Limited Embed Preview */}
-              <div className="mt-4 max-h-[400px] overflow-y-auto border rounded bg-gray-100 shadow-inner p-2">
-                {pub.embedType === 'pdf' ? (
-                  <iframe
-                    src={pub.embed}
-                    title={pub.title}
-                    width="100%"
-                    height="300"
-                    className="rounded shadow border"
-                    allow="autoplay"
-                  ></iframe>
-                ) : (
-                  <div className="flex flex-col items-center space-y-2">
-                    {Array.from({ length: Math.min(pub.imageCount, 3) }, (_, i) => (
-                      <img
-                        key={i}
-                        src={`${pub.imagePrefix}${i + 1}.png`}
-                        alt={`Page ${i + 1}`}
-                        className="w-full object-contain rounded"
-                      />
-                    ))}
-                  </div>
-                )}
-              </div>
+              {/* No embed on mobile */}
             </div>
           ))}
         </div>
