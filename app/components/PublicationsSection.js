@@ -105,7 +105,7 @@ export default function PublicationsSection() {
         </div>
       </div>
 
-      {/* 📱 Mobile Carousel */}
+      {/* 📱 Mobile Carousel — No Embed */}
       <div className="md:hidden relative w-full h-screen-svh overflow-hidden pt-2">
         {index > 0 && (
           <button
@@ -145,29 +145,6 @@ export default function PublicationsSection() {
                       View Document ↗
                     </a>
                   </div>
-                </div>
-                <div className="flex-1 overflow-y-auto bg-gray-100 rounded border shadow-inner p-2 mt-2">
-                  {pub.embedType === 'pdf' ? (
-                    <iframe
-                      src={pub.link}
-                      title={pub.title}
-                      width="100%"
-                      height="100%"
-                      className="rounded shadow border"
-                      allow="autoplay"
-                    ></iframe>
-                  ) : (
-                    <div className="flex flex-col items-center space-y-4">
-                      {Array.from({ length: pub.imageCount }, (_, i) => (
-                        <img
-                          key={i}
-                          src={`${pub.imagePrefix}${i + 1}.png`}
-                          alt={`Page ${i + 1}`}
-                          className="w-full max-w-full object-contain rounded"
-                        />
-                      ))}
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
