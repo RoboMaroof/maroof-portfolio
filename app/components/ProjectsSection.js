@@ -191,7 +191,7 @@ export default function ProjectsSection() {
       </div>
 
       {/* 📱 Mobile Version */}
-      <div className="md:hidden relative flex overflow-hidden w-full h-[calc(100svh-144px-env(safe-area-inset-bottom))] items-start">
+      <div className="md:hidden relative w-full h-screen-svh overflow-hidden pt-2">
         {index > 0 && (
           <button onClick={() => setIndex((index - 1 + total) % total)}
             className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-20"
@@ -209,10 +209,8 @@ export default function ProjectsSection() {
 
         <div className="flex transition-transform duration-500 w-full" style={{ transform: `translateX(-${index * 100}%)` }}>
           {projects.map((proj) => (
-            <div key={proj.id}
-            className="min-w-full snap-center px-4 flex items-start justify-center pt-2"
-            >
-              <div className="w-full max-w-md h-full bg-gray-100 rounded-xl shadow-md p-4 flex flex-col gap-4 overflow-hidden">
+            <div key={proj.id} className="min-w-full h-full snap-center px-4 flex items-start justify-center pt-2">
+              <div className="w-full max-w-md h-full bg-gray-100 rounded-2xl shadow-md p-4 flex flex-col gap-4 overflow-hidden">
                 <div>
                   <h3 className="text-xl font-semibold text-center mb-1">{proj.title}</h3>
                   <p className="text-center text-sm text-gray-500 mb-2">{proj.timeline}</p>
