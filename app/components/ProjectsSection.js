@@ -106,7 +106,6 @@ export default function ProjectsSection() {
   const [index, setIndex] = useState(0)
   const [zoomedImage, setZoomedImage] = useState(null)
   const total = projects.length
-
   const getProject = (i) => projects[(i + total) % total]
 
   return (
@@ -132,27 +131,21 @@ export default function ProjectsSection() {
                 w-full max-w-[90%] absolute transform
                 ${offset === -1 ? '-translate-x-full' : offset === 1 ? 'translate-x-full' : 'translate-x-0'}`}
             >
-              {/* Arrows */}
               {isCurrent && (
                 <>
-                  <button
-                    onClick={() => setIndex((index - 1 + total) % total)}
+                  <button onClick={() => setIndex((index - 1 + total) % total)}
                     className="absolute -left-10 top-1/2 transform -translate-y-1/2 p-2 rounded-full hover:bg-gray-200 z-20"
-                    aria-label="Previous Project"
-                  >
+                    aria-label="Previous Project">
                     <ArrowLeft size={60} strokeWidth={2.5} className="text-gray-500" />
                   </button>
-                  <button
-                    onClick={() => setIndex((index + 1) % total)}
+                  <button onClick={() => setIndex((index + 1) % total)}
                     className="absolute -right-10 top-1/2 transform -translate-y-1/2 p-2 rounded-full hover:bg-gray-200 z-20"
-                    aria-label="Next Project"
-                  >
+                    aria-label="Next Project">
                     <ArrowRight size={60} strokeWidth={2.5} className="text-gray-500" />
                   </button>
                 </>
               )}
 
-              {/* Project Card */}
               <div className="bg-gray-200 rounded-2xl shadow-xl p-6 h-[600px] flex flex-col">
                 <h3 className="text-2xl font-semibold text-center mb-1">{proj.title}</h3>
                 <p className="text-center text-sm text-gray-500 mb-3">{proj.timeline}</p>
@@ -161,17 +154,11 @@ export default function ProjectsSection() {
                   <div className="flex-1 flex flex-col justify-between text-left">
                     <div>
                       <ul className="text-base text-gray-700 list-disc pl-6 space-y-2 mb-4">
-                        {proj.points.map((pt, i) => (
-                          <li key={i}>{pt}</li>
-                        ))}
+                        {proj.points.map((pt, i) => <li key={i}>{pt}</li>)}
                       </ul>
                       {proj.link && (
-                        <a
-                          href={proj.link}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-blue-600 text-sm inline-block hover:underline mb-4"
-                        >
+                        <a href={proj.link} target="_blank" rel="noreferrer"
+                          className="text-blue-600 text-sm inline-block hover:underline mb-4">
                           View on GitHub ↗
                         </a>
                       )}
@@ -179,16 +166,9 @@ export default function ProjectsSection() {
                     {proj.tech && (
                       <div className="flex flex-wrap gap-4 mt-4">
                         {proj.tech.map((icon, i) => (
-                          <div
-                            key={i}
-                            className="w-16 h-16 bg-white rounded-full shadow flex items-center justify-center p-2"
-                            title={iconTitles[icon] || icon.replace(".png", "")}
-                          >
-                            <img
-                              src={`/tech/${icon}`}
-                              alt={icon}
-                              className="w-full h-full object-contain"
-                            />
+                          <div key={i} className="w-16 h-16 bg-white rounded-full shadow flex items-center justify-center p-2"
+                            title={iconTitles[icon] || icon.replace(".png", "")}>
+                            <img src={`/tech/${icon}`} alt={icon} className="w-full h-full object-contain" />
                           </div>
                         ))}
                       </div>
@@ -198,12 +178,9 @@ export default function ProjectsSection() {
                   {/* Right */}
                   <div className="flex-1 flex items-center justify-center">
                     {proj.image && (
-                      <img
-                        src={proj.image}
-                        alt={proj.title}
+                      <img src={proj.image} alt={proj.title}
                         onClick={() => setZoomedImage(proj.image)}
-                        className="max-h-[500px] w-auto object-contain rounded-lg shadow cursor-zoom-in"
-                      />
+                        className="max-h-[500px] w-auto object-contain rounded-lg shadow cursor-zoom-in" />
                     )}
                   </div>
                 </div>
@@ -213,66 +190,54 @@ export default function ProjectsSection() {
         })}
       </div>
 
-      {/* 📱 Mobile Horizontal Scrollable Cards with controlled index */}
+      {/* 📱 Mobile Version */}
       <div className="md:hidden relative flex overflow-hidden w-full">
         {index > 0 && (
-          <button
-            onClick={() => setIndex((index - 1 + total) % total)}
+          <button onClick={() => setIndex((index - 1 + total) % total)}
             className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-20"
-            aria-label="Previous"
-          >
+            aria-label="Previous">
             <ArrowLeft size={32} className="text-gray-700" />
           </button>
         )}
         {index < total - 1 && (
-          <button
-            onClick={() => setIndex((index + 1) % total)}
+          <button onClick={() => setIndex((index + 1) % total)}
             className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-20"
-            aria-label="Next"
-          >
+            aria-label="Next">
             <ArrowRight size={32} className="text-gray-700" />
           </button>
         )}
+
         <div className="flex transition-transform duration-500 w-full" style={{ transform: `translateX(-${index * 100}%)` }}>
-          {projects.map((proj, i) => (
-            <div
-              key={proj.id}
-              className="min-w-full h-screen-svh snap-center bg-gray-100 rounded-xl shadow-md p-4 flex flex-col"
+          {projects.map((proj) => (
+            <div key={proj.id}
+              className="min-w-full h-screen-svh snap-center bg-gray-100 rounded-xl shadow-md p-4 flex flex-col gap-4"
             >
-              <h3 className="text-xl font-semibold text-center mb-1">{proj.title}</h3>
-              <p className="text-center text-sm text-gray-500 mb-3">{proj.timeline}</p>
-              <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-4">
-                {proj.points.map((pt, idx) => (
-                  <li key={idx}>{pt}</li>
-                ))}
-              </ul>
-              {proj.link && (
-                <a
-                  href={proj.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-blue-600 text-sm inline-block hover:underline mb-4"
-                >
-                  View on GitHub ↗
-                </a>
-              )}
-              {proj.tech && (
-                <div className="flex flex-wrap gap-3 mt-auto justify-center">
-                  {proj.tech.map((icon, i) => (
-                    <div
-                      key={i}
-                      className="w-10 h-10 bg-white rounded-full shadow flex items-center justify-center p-1"
-                      title={iconTitles[icon] || icon.replace(".png", "")}
-                    >
-                      <img
-                        src={`/tech/${icon}`}
-                        alt={icon}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                  ))}
+              <div className="flex-1 flex flex-col gap-4">
+                <div>
+                  <h3 className="text-xl font-semibold text-center mb-1">{proj.title}</h3>
+                  <p className="text-center text-sm text-gray-500 mb-3">{proj.timeline}</p>
+                  <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-2">
+                    {proj.points.map((pt, i) => <li key={i}>{pt}</li>)}
+                  </ul>
+                  {proj.link && (
+                    <a href={proj.link} target="_blank" rel="noreferrer"
+                      className="text-blue-600 text-sm inline-block hover:underline mb-2">
+                      View on GitHub ↗
+                    </a>
+                  )}
                 </div>
-              )}
+                {proj.tech && (
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {proj.tech.map((icon, i) => (
+                      <div key={i}
+                        className="w-10 h-10 bg-white rounded-full shadow flex items-center justify-center p-1.5"
+                        title={iconTitles[icon] || icon.replace(".png", "")}>
+                        <img src={`/tech/${icon}`} alt={icon} className="w-full h-full object-contain" />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>
@@ -280,15 +245,9 @@ export default function ProjectsSection() {
 
       {/* Zoom Modal for Desktop */}
       {zoomedImage && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 cursor-zoom-out"
-          onClick={() => setZoomedImage(null)}
-        >
-          <img
-            src={zoomedImage}
-            alt="Zoomed"
-            className="max-w-full max-h-full object-contain"
-          />
+        <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 cursor-zoom-out"
+          onClick={() => setZoomedImage(null)}>
+          <img src={zoomedImage} alt="Zoomed" className="max-w-full max-h-full object-contain" />
         </div>
       )}
     </section>
