@@ -129,25 +129,26 @@ export default function PublicationsSection() {
           {publications.map((pub) => (
             <div
               key={pub.id}
-              className="min-w-full snap-center bg-white rounded-xl shadow-lg p-4 flex flex-col justify-between"
+              className="min-w-full h-screen-svh snap-center bg-white rounded-xl shadow-lg p-4 flex flex-col justify-center"
             >
-              <div className="flex items-start gap-2 mb-2">
-                <FaFileAlt className="text-xl text-gray-700 mt-1" />
-                <div>
-                  <h3 className="text-lg font-semibold">{pub.title}</h3>
-                  <p className="text-gray-600 text-sm">{pub.subtitle}</p>
-                  <p className="mt-1 text-sm text-gray-700">{pub.description}</p>
-                  <a
-                    href={pub.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-blue-600 text-sm hover:underline mt-2 inline-block"
-                  >
-                    View Document ↗
-                  </a>
+              <div className="flex flex-col gap-3 overflow-y-auto">
+                <div className="flex items-start gap-2">
+                  <FaFileAlt className="text-xl text-gray-700 mt-1" />
+                  <div>
+                    <h3 className="text-lg font-semibold">{pub.title}</h3>
+                    <p className="text-gray-600 text-sm">{pub.subtitle}</p>
+                    <p className="mt-1 text-sm text-gray-700">{pub.description}</p>
+                    <a
+                      href={pub.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-600 text-sm hover:underline mt-2 inline-block"
+                    >
+                      View Document ↗
+                    </a>
+                  </div>
                 </div>
               </div>
-              {/* No embed on mobile */}
             </div>
           ))}
         </div>
