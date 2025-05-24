@@ -1,5 +1,7 @@
 'use client'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 const ExperienceCard = ({ title, company, date, points, projectId, logo }) => (
   <motion.div
@@ -177,10 +179,12 @@ export default function ExperienceSection() {
     },
   ]
 
+  const [index, setIndex] = useState(0)
+
   return (
     <section
       id="experience"
-      className="snap-start min-h-screen bg-gray-200 px-4 sm:px-6 pt-24"
+      className="snap-start min-h-[100dvh] md:min-h-screen bg-gray-200 px-4 sm:px-6 pt-[72px] md:pt-24"
     >
       <h2 className="text-3xl font-bold text-center mb-8 tracking-[0.35em] text-gray-700">
         EXPERIENCE
@@ -195,12 +199,36 @@ export default function ExperienceSection() {
       </div>
 
       {/* Mobile Horizontal Swipe Scroll */}
-      <div className="md:hidden flex overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth w-full">
-        {experiences.map((exp, i) => (
-          <div key={i} className="snap-center shrink-0 w-full px-4">
-            <ExperienceCard {...exp} />
-          </div>
-        ))}
+      <div className="md:hidden relative flex overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth w-full">
+        {index > 0 && (
+          <button
+            onClick={() => setIndex((index - 1 + experiences.length) % experiences.length)}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-20"
+            aria-label="Previous"
+          >
+            <ArrowLeft size={32} className="text-gray-700" />
+          </button>
+        )}
+        {index < experiences.length - 1 && (
+          <button
+            onClick={() => setIndex((index + 1) % experiences.length)}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-20"
+            aria-label="Next"
+          >
+            <ArrowRight size={32} className="text-gray-700" />
+          </button>
+        )}
+
+        <div className="w-full flex transition-transform duration-500" style={{ transform: `translateX(-${index * 100}%)` }}>
+          {experiences.map((exp, i) => (
+            <div
+              key={i}
+              className="min-w-full h-[100dvh] snap-center px-4 flex items-center justify-center"
+            >
+              <ExperienceCard {...exp} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )

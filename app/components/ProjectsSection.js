@@ -112,7 +112,7 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="snap-start min-h-screen bg-white px-4 pt-24"
+      className="snap-start min-h-[100dvh] md:min-h-screen bg-white px-4 pt-[72px] md:pt-24"
     >
       <h2 className="text-3xl font-bold text-center mb-8 tracking-[0.35em] text-gray-700">
         PROJECTS
@@ -213,49 +213,69 @@ export default function ProjectsSection() {
         })}
       </div>
 
-      {/* 📱 Mobile Horizontal Scrollable Cards */}
-      <div className="md:hidden flex overflow-x-auto no-scrollbar snap-x snap-mandatory gap-4 px-1 -mx-1 pb-6">
-        {projects.map((proj, i) => (
-          <div
-            key={proj.id}
-            className="min-w-full snap-center bg-gray-100 rounded-xl shadow-md p-4 flex flex-col"
+      {/* 📱 Mobile Horizontal Scrollable Cards with controlled index */}
+      <div className="md:hidden relative flex overflow-hidden w-full">
+        {index > 0 && (
+          <button
+            onClick={() => setIndex((index - 1 + total) % total)}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-20"
+            aria-label="Previous"
           >
-            <h3 className="text-xl font-semibold text-center mb-1">{proj.title}</h3>
-            <p className="text-center text-sm text-gray-500 mb-3">{proj.timeline}</p>
-            <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-4">
-              {proj.points.map((pt, idx) => (
-                <li key={idx}>{pt}</li>
-              ))}
-            </ul>
-            {proj.link && (
-              <a
-                href={proj.link}
-                target="_blank"
-                rel="noreferrer"
-                className="text-blue-600 text-sm inline-block hover:underline mb-4"
-              >
-                View on GitHub ↗
-              </a>
-            )}
-            {proj.tech && (
-              <div className="flex flex-wrap gap-3 mt-auto justify-center">
-                {proj.tech.map((icon, i) => (
-                  <div
-                    key={i}
-                    className="w-10 h-10 bg-white rounded-full shadow flex items-center justify-center p-1"
-                    title={iconTitles[icon] || icon.replace(".png", "")}
-                  >
-                    <img
-                      src={`/tech/${icon}`}
-                      alt={icon}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
+            <ArrowLeft size={32} className="text-gray-700" />
+          </button>
+        )}
+        {index < total - 1 && (
+          <button
+            onClick={() => setIndex((index + 1) % total)}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-20"
+            aria-label="Next"
+          >
+            <ArrowRight size={32} className="text-gray-700" />
+          </button>
+        )}
+        <div className="flex transition-transform duration-500 w-full" style={{ transform: `translateX(-${index * 100}%)` }}>
+          {projects.map((proj, i) => (
+            <div
+              key={proj.id}
+              className="min-w-full h-[100dvh] snap-center bg-gray-100 rounded-xl shadow-md p-4 flex flex-col"
+            >
+              <h3 className="text-xl font-semibold text-center mb-1">{proj.title}</h3>
+              <p className="text-center text-sm text-gray-500 mb-3">{proj.timeline}</p>
+              <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-4">
+                {proj.points.map((pt, idx) => (
+                  <li key={idx}>{pt}</li>
                 ))}
-              </div>
-            )}
-          </div>
-        ))}
+              </ul>
+              {proj.link && (
+                <a
+                  href={proj.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-blue-600 text-sm inline-block hover:underline mb-4"
+                >
+                  View on GitHub ↗
+                </a>
+              )}
+              {proj.tech && (
+                <div className="flex flex-wrap gap-3 mt-auto justify-center">
+                  {proj.tech.map((icon, i) => (
+                    <div
+                      key={i}
+                      className="w-10 h-10 bg-white rounded-full shadow flex items-center justify-center p-1"
+                      title={iconTitles[icon] || icon.replace(".png", "")}
+                    >
+                      <img
+                        src={`/tech/${icon}`}
+                        alt={icon}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Zoom Modal for Desktop */}

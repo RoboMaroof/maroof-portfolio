@@ -33,7 +33,7 @@ export default function PublicationsSection() {
   return (
     <section
       id="publications"
-      className="min-h-screen bg-gray-200 px-4 sm:px-6 pt-24 pb-16 flex flex-col items-center"
+      className="min-h-[100dvh] md:min-h-screen bg-gray-200 px-4 sm:px-6 pt-[72px] md:pt-24 pb-16 flex flex-col items-center"
     >
       <h2 className="text-3xl font-bold text-center mb-8 tracking-[0.35em] text-gray-700">
         PUBLICATIONS
@@ -104,56 +104,77 @@ export default function PublicationsSection() {
         </div>
       </div>
 
-      {/* 📱 Mobile Horizontal Scroll */}
-      <div className="md:hidden flex overflow-x-auto no-scrollbar snap-x snap-mandatory gap-4 px-1 -mx-1 pb-6 w-full">
-        {publications.map((pub) => (
-          <div
-            key={pub.id}
-            className="min-w-full snap-center bg-white rounded-xl shadow-lg p-4 flex flex-col justify-between"
+      {/* 📱 Mobile Horizontal Scroll (Updated) */}
+      <div className="md:hidden relative w-full overflow-hidden">
+        {index > 0 && (
+          <button
+            onClick={() => setIndex((index - 1 + total) % total)}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-20"
+            aria-label="Previous"
           >
-            <div className="flex items-start gap-2 mb-2">
-              <FaFileAlt className="text-xl text-gray-700 mt-1" />
-              <div>
-                <h3 className="text-lg font-semibold">{pub.title}</h3>
-                <p className="text-gray-600 text-sm">{pub.subtitle}</p>
-                <p className="mt-1 text-sm text-gray-700">{pub.description}</p>
-                <a
-                  href={pub.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-blue-600 text-sm hover:underline mt-2 inline-block"
-                >
-                  View Document ↗
-                </a>
+            <ArrowLeft size={32} className="text-gray-700" />
+          </button>
+        )}
+        {index < total - 1 && (
+          <button
+            onClick={() => setIndex((index + 1) % total)}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-20"
+            aria-label="Next"
+          >
+            <ArrowRight size={32} className="text-gray-700" />
+          </button>
+        )}
+
+        <div className="flex transition-transform duration-500 w-full" style={{ transform: `translateX(-${index * 100}%)` }}>
+          {publications.map((pub, i) => (
+            <div
+              key={pub.id}
+              className="min-w-full h-[100dvh] snap-center bg-white rounded-xl shadow-lg p-4 flex flex-col justify-between"
+            >
+              <div className="flex items-start gap-2 mb-2">
+                <FaFileAlt className="text-xl text-gray-700 mt-1" />
+                <div>
+                  <h3 className="text-lg font-semibold">{pub.title}</h3>
+                  <p className="text-gray-600 text-sm">{pub.subtitle}</p>
+                  <p className="mt-1 text-sm text-gray-700">{pub.description}</p>
+                  <a
+                    href={pub.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-blue-600 text-sm hover:underline mt-2 inline-block"
+                  >
+                    View Document ↗
+                  </a>
+                </div>
+              </div>
+
+              {/* Limited Embed Preview */}
+              <div className="mt-4 max-h-[400px] overflow-y-auto border rounded bg-gray-100 shadow-inner p-2">
+                {pub.embedType === 'pdf' ? (
+                  <iframe
+                    src={pub.embed}
+                    title={pub.title}
+                    width="100%"
+                    height="300"
+                    className="rounded shadow border"
+                    allow="autoplay"
+                  ></iframe>
+                ) : (
+                  <div className="flex flex-col items-center space-y-2">
+                    {Array.from({ length: Math.min(pub.imageCount, 3) }, (_, i) => (
+                      <img
+                        key={i}
+                        src={`${pub.imagePrefix}${i + 1}.png`}
+                        alt={`Page ${i + 1}`}
+                        className="w-full object-contain rounded"
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
-
-            {/* Limited Embed Preview */}
-            <div className="mt-4 max-h-[400px] overflow-y-auto border rounded bg-gray-100 shadow-inner p-2">
-              {pub.embedType === 'pdf' ? (
-                <iframe
-                  src={pub.embed}
-                  title={pub.title}
-                  width="100%"
-                  height="300"
-                  className="rounded shadow border"
-                  allow="autoplay"
-                ></iframe>
-              ) : (
-                <div className="flex flex-col items-center space-y-2">
-                  {Array.from({ length: Math.min(pub.imageCount, 3) }, (_, i) => (
-                    <img
-                      key={i}
-                      src={`${pub.imagePrefix}${i + 1}.png`}
-                      alt={`Page ${i + 1}`}
-                      className="w-full object-contain rounded"
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   )

@@ -6,7 +6,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="snap-start min-h-screen bg-gray-50 px-4 sm:px-6 pt-20 pb-12 flex flex-col justify-center items-center"
+      className="snap-start min-h-[100dvh] md:min-h-screen bg-gray-50 px-4 sm:px-6 pt-[72px] md:pt-24 pb-12 flex flex-col justify-center items-center"
     >
       <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-6 tracking-[0.35em] text-gray-700">
         CONTACT
